@@ -1,0 +1,57 @@
+.admin-grid {
+    display: grid;
+    grid-template-columns:  30% 70%;
+    grid-template-areas: 
+        'adminActionBar adminContentBar'
+    ;
+}
+
+.event-hero {
+   background: linear-gradient(90deg, rgba(27, 2, 68, 0.2) 0%, rgba(27, 2, 68, 0.2) 53%, rgba(27, 2, 68, 0.2) 100%), url('../image/eventhero.jpeg');
+    display: grid;
+    place-content: center;
+    color: white;
+    padding: 20px 0;
+    
+}
+
+.adminGridSectionOne{
+    grid-area: adminActionBar;
+    /* width: 30% !important; */
+}
+
+.adminGridSectionTwo{
+    grid-area: adminContentBar;
+    /* width: 70%; */
+
+}
+
+@media (max-width: 600px) {
+    .admin-grid {
+    display: grid;
+    grid-template-columns:  100%;
+    grid-template-areas: 
+        'adminActionBar' 
+        'adminContentBar'
+    ;
+
+    
+}
+
+.adminGridSectionOne{
+    grid-area: adminActionBar;
+    width: 93% !important;
+    margin-top: 30px;
+    position: absolute;
+     background-color: whitesmoke !important;
+    z-index: 40;
+    padding: 5px 0;
+   
+}
+
+.adminGridSectionTwo{
+    grid-area: adminContentBar;
+    /* width: 70%; */
+
+}
+}

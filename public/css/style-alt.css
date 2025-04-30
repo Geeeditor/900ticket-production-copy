@@ -1,0 +1,32 @@
+#lang-curr-selector {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 10px !important;
+
+    /* width: fit-content !important; */
+}
+
+/* clip-path: ellipse(62% 99% at 51% 0%); */
+
+#lang-curr-container {}
+
+.gtranslate-wrapper {
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+#lang-cur>div {
+    display: flex !important;
+    /* min-width: 240px !important; */
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+
+
+}
+
+/* .auth-sliderOne {
+   background: linear-gradient(90deg, rgba(0,0,0,0.4962359943977591) 0%, rgba(0,0,0,0.43461134453781514) 53%, rgba(0,0,0,0.3841911764705882) 100%), url('../image/profilePop1-v3.jpg');
+   height: 400; 
+} */

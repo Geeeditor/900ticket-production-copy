@@ -1,0 +1,6 @@
+Flight API
+https://developers.amadeus.com/
+https://stackoverflow.com/questions/42658986/how-can-i-integrate-the-amadeus-api-with-my-laravel-web-page
+
+Payment Gateway
+Paystack
