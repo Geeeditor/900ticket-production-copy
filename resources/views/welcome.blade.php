@@ -1252,7 +1252,7 @@
                     <h2 class="mb-3 text-[18px] font-bold uppercase md:text-[22.5px]">Top Event of the week</h2>
 
                     <span>
-                        {{ $events->links() }}
+                        {{ $events->links('vendor.pagination.simple-tailwind') }}
                     </span>
                 </div>
 

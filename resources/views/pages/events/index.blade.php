@@ -3,13 +3,13 @@
 @section('title', 'Find Trendy Events')
 
 @section('hero')
-    <div class="w-full   relative">
+    <div class="relative w-full">
         {{-- hero content --}}
 
         <div>
 
 
-            <div class="relative ">
+            <div class="relative">
                 {{-- hero bg --}}
                 {{-- <video autoplay muted loop
                             >
@@ -17,14 +17,14 @@
                             Your browser does not support the video tag.
                         </video> --}}
 
-                <img class="hero-bg absolute top-0 left-0 w-full h-[62.5vh] md:h-[70vh] object-cover"
+                <img class="hero-bg absolute left-0 top-0 h-[62.5vh] w-full object-cover md:h-[70vh]"
                     src="{{ asset('image/eventhero.png') }}" alt="lorem ipsum">
 
 
                 {{-- hero content --}}
-                <div class="relative z-10 flex items-center flex-col gap-10 justify-start    top-[22.5vh] w-full">
-                    <div class="flex  items-center relative w-[70%] group">
-                        <svg class="absolute left-4 fill-black w-4 h-4" aria-hidden="true" viewBox="0 0 24 24">
+                <div class="relative top-[22.5vh] z-10 flex w-full flex-col items-center justify-start gap-10">
+                    <div class="group relative flex w-[70%] items-center">
+                        <svg class="absolute left-4 h-4 w-4 fill-black" aria-hidden="true" viewBox="0 0 24 24">
                             <g>
                                 <path
                                     d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z">
@@ -32,13 +32,13 @@
                             </g>
                         </svg>
                         <input placeholder="Look up the trendiest event..." type="search"
-                            class="h-10 line-height[28px] pl-10 w-full border-2 border-transparent rounded-lg bg-[#ffffff] text-[#04030f] shadow shadow-gray-400 transition duration-300 ease-in-out focus:outline-none focus:border-red-200" />
+                            class="line-height[28px] h-10 w-full rounded-lg border-2 border-transparent bg-[#ffffff] pl-10 text-[#04030f] shadow shadow-gray-400 transition duration-300 ease-in-out focus:border-red-200 focus:outline-none" />
                     </div>
 
-                    <div class="flex justify-center mx-auto flex-wrap gap-[1.5rem] md:gap-[2rem] w-[70%] ">
+                    <div class="mx-auto flex w-[70%] flex-wrap justify-center gap-[1.5rem] md:gap-[2rem]">
                         <div
-                            class="bg-white shadow shadow-gray-300 rounded-md border border-gray-200 px-7 md:px-[2rem] flex justify-center items-center  py-4 hover:scale-[1.1] ease-in-out hover:bg-slate-100 hover:shadow-md">
-                            <a class="flex-col flex items-center justify-center" href="javascript:void(0)">
+                            class="flex items-center justify-center rounded-md border border-gray-200 bg-white px-7 py-4 shadow shadow-gray-300 ease-in-out hover:scale-[1.1] hover:bg-slate-100 hover:shadow-md md:px-[2rem]">
+                            <a class="flex flex-col items-center justify-center" href="javascript:void(0)">
                                 <img class="w-[35px]" src="{{ asset('image/icons/flight-alt.svg') }}" alt="lorem ipsum">
                                 <span class="inline-block text-center text-sm font-[700]">
                                     Flight
@@ -46,8 +46,8 @@
                             </a>
                         </div>
                         <div
-                            class="bg-white shadow shadow-gray-300 rounded-md px-7 border border-gray-200 md:px-[2rem] flex justify-center items-center  py-5 hover:scale-[1.1] ease-in-out hover:bg-slate-100 hover:shadow-md">
-                            <a class="flex-col flex items-center justify-center" href="javascript:void(0)">
+                            class="flex items-center justify-center rounded-md border border-gray-200 bg-white px-7 py-5 shadow shadow-gray-300 ease-in-out hover:scale-[1.1] hover:bg-slate-100 hover:shadow-md md:px-[2rem]">
+                            <a class="flex flex-col items-center justify-center" href="javascript:void(0)">
                                 <img class="w-[35px]" src="{{ asset('image/icons/hotel-alt.svg') }}" alt="lorem ipsum">
                                 <span class="inline-block text-center text-sm font-[700]">
                                     Hotel
@@ -55,8 +55,8 @@
                             </a>
                         </div>
                         <div
-                            class="bg-white shadow shadow-gray-300 rounded-md px-6 md:px-[2rem] flex justify-center border border-gray-200 items-center  py-4 hover:scale-[1.1] ease-in-out hover:bg-slate-100 hover:shadow-md">
-                            <a class="flex-col flex items-center justify-center" href="javascript:void(0)">
+                            class="flex items-center justify-center rounded-md border border-gray-200 bg-white px-6 py-4 shadow shadow-gray-300 ease-in-out hover:scale-[1.1] hover:bg-slate-100 hover:shadow-md md:px-[2rem]">
+                            <a class="flex flex-col items-center justify-center" href="javascript:void(0)">
                                 <img class="w-[35px]" src="{{ asset('image/icons/ticket-alt.svg') }}" alt="lorem ipsum">
                                 <span class="inline-block text-center text-sm font-[700]">
                                     Party
@@ -67,8 +67,8 @@
                             </a>
                         </div>
                         <div
-                            class="bg-white rounded-md border border-gray-200 px-5 md:px-[2rem] shadow shadow-gray-300 flex justify-center items-center  py-4 hover:scale-[1.1] ease-in-out hover:bg-slate-100 hover:shadow-md">
-                            <a class="flex-col flex items-center justify-center" href="javascript:void(0)">
+                            class="flex items-center justify-center rounded-md border border-gray-200 bg-white px-5 py-4 shadow shadow-gray-300 ease-in-out hover:scale-[1.1] hover:bg-slate-100 hover:shadow-md md:px-[2rem]">
+                            <a class="flex flex-col items-center justify-center" href="javascript:void(0)">
                                 <img class="w-[35px]" src="{{ asset('image/icons/shortlet-alt.svg') }}" alt="lorem ipsum">
                                 <span class="inline-block text-center text-sm font-[700]">
                                     Shortlet
@@ -92,14 +92,15 @@
 
 @section('content')
     <main class="mt-[235px]">
-        <section class=" my-3  w-[85%] md:w-[80%] mx-auto">
+        <section class="mx-auto my-3 w-[85%] md:w-[80%]">
             <div>
                 <div>
                     <div class="flex justify-between">
                         <h2 class="mb-3 text-[18px] font-bold uppercase md:text-[22.5px]">LATEST Events</h2>
 
                         <span>
-                            {{ $latestEvents->links() }}
+
+                            {{ $latestEvents->links('vendor.pagination.simple-tailwind') }}
                         </span>
                     </div>
 
@@ -191,10 +192,10 @@
                             <div class="col-span-4 py-5 md:py-10">
                                 <div class="flex flex-col items-center justify-center gap-0">
                                     <img src="{{ asset('image/error.svg') }}" alt="lorem ipsum">
-                                    <span class="capitalize font-bold text-1xl md:text-2xl py-1">
+                                    <span class="text-1xl py-1 font-bold capitalize md:text-2xl">
                                         Sorry no Party Ticket Available For This Category
                                     </span>
-                                    <div class=" font-thin">
+                                    <div class="font-thin">
                                         <span>
                                             Stay tuned..
                                         </span>
@@ -211,14 +212,14 @@
             </div>
         </section>
 
-        <section class=" my-3  w-[85%] md:w-[80%] mx-auto">
+        <section class="mx-auto my-3 w-[85%] md:w-[80%]">
             <div>
                 <div>
                     <div class="flex justify-between">
                         <h2 class="mb-3 text-[18px] font-bold uppercase md:text-[22.5px]">All Events</h2>
 
                         <span>
-                            {{ $allEvents->links() }}
+                            {{ $allEvents->links('vendor.pagination.simple-tailwind') }}
                         </span>
                     </div>
 
@@ -310,10 +311,10 @@
                             <div class="col-span-4 py-5 md:py-10">
                                 <div class="flex flex-col items-center justify-center gap-0">
                                     <img src="{{ asset('image/error.svg') }}" alt="lorem ipsum">
-                                    <span class="capitalize font-bold text-1xl md:text-2xl py-1">
+                                    <span class="text-1xl py-1 font-bold capitalize md:text-2xl">
                                         Sorry no Party Ticket Available For This Category
                                     </span>
-                                    <div class=" font-thin">
+                                    <div class="font-thin">
                                         <span>
                                             Stay tuned..
                                         </span>
@@ -330,14 +331,14 @@
             </div>
         </section>
 
-        <section class=" my-3  w-[85%] md:w-[80%] mx-auto">
+        <section class="mx-auto my-3 w-[85%] md:w-[80%]">
             <div>
                 <div>
                     <div class="flex justify-between">
                         <h2 class="mb-3 text-[18px] font-bold uppercase md:text-[22.5px]">Featured Events</h2>
 
                         <span>
-                            {{ $featuredEvents->links() }}
+                            {{ $featuredEvents->links('vendor.pagination.simple-tailwind') }}
                         </span>
                     </div>
 
@@ -426,10 +427,10 @@
                             <div class="col-span-4 py-5 md:py-10">
                                 <div class="flex flex-col items-center justify-center gap-0">
                                     <img src="{{ asset('image/error.svg') }}" alt="lorem ipsum">
-                                    <span class="capitalize font-bold text-1xl md:text-2xl py-1">
+                                    <span class="text-1xl py-1 font-bold capitalize md:text-2xl">
                                         Sorry no Party Ticket Available For This Category
                                     </span>
-                                    <div class=" font-thin">
+                                    <div class="font-thin">
                                         <span>
                                             Stay tuned..
                                         </span>
@@ -450,17 +451,17 @@
 
         <section class="bg-red-700">
             <div class="py-4 md:py-8">
-                <div class="max-w-6xl mx-auto text-center">
-                    <h2 class="text-white md:text-5xl text-3xl font-bold mb-6">Join Our Exclusive Newsletter</h2>
-                    <p class="md:text-xl text-sm text-gray-300">Get your favourite artist ticket sales notifications from
+                <div class="mx-auto max-w-6xl text-center">
+                    <h2 class="mb-6 text-3xl font-bold text-white md:text-5xl">Join Our Exclusive Newsletter</h2>
+                    <p class="text-sm text-gray-300 md:text-xl">Get your favourite artist ticket sales notifications from
                         the comfort of your inbox. </p>
 
                     <div
-                        class="bg-white shadow-lg rounded-lg p-8 mt-14 flex flex-col md:flex-row items-center justify-center">
+                        class="mt-14 flex flex-col items-center justify-center rounded-lg bg-white p-8 shadow-lg md:flex-row">
                         <input type="email" placeholder="Enter your email"
-                            class="w-full md:w-96 bg-transparent border-b-2 border-red-700 py-3 px-4 text-[#2e0249] text-base focus:outline-none placeholder-red-700 placeholder-opacity-70" />
+                            class="w-full border-b-2 border-red-700 bg-transparent px-4 py-3 text-base text-[#2e0249] placeholder-red-700 placeholder-opacity-70 focus:outline-none md:w-96" />
                         <button
-                            class="max-md:mt-6 md:ml-4 bg-red-700 hover:bg-red-500 text-white font-medium py-3 px-6 rounded hover:shadow-md hover:transform hover:scale-105 focus:outline-none">
+                            class="rounded bg-red-700 px-6 py-3 font-medium text-white hover:scale-105 hover:transform hover:bg-red-500 hover:shadow-md focus:outline-none max-md:mt-6 md:ml-4">
                             Join Now!
                         </button>
                     </div>
