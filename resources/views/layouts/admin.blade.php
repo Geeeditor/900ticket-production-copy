@@ -10,6 +10,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @yield('style')
     <link rel="stylesheet" href="{{ asset('css/admin-style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css">
@@ -17,19 +18,19 @@
 
 <body>
     <header
-        class='flex shadow-md py-3 px-4 sm:px-10 md:px-[90px] bg-white font-[sans-serif] min-h-[70px] tracking-wide relative z-50'>
-        <div class='flex flex-wrap items-center justify-between lg:gap-y-4 gap-y-6 gap-x-4 w-full'>
+        class='relative z-50 flex min-h-[70px] bg-white px-4 py-3 font-[sans-serif] tracking-wide shadow-md sm:px-10 md:px-[90px]'>
+        <div class='flex w-full flex-wrap items-center justify-between gap-x-4 gap-y-6 lg:gap-y-4'>
 
             <a href="/admin"><img src="{{ asset('image/logo_alt.svg') }}" alt="logo"
-                    class='w-[100px] md:w-26' />
+                    class='md:w-26 w-[100px]' />
             </a>
 
 
 
-            <div x-data="{ actionNav: false }" class='flex items-center max-sm:ml-auto space-x-6'>
+            <div x-data="{ actionNav: false }" class='flex items-center space-x-6 max-sm:ml-auto'>
                 <ul>
                     <li id=" profile-dropdown-toggle"
-                        class="relative  px-1 after:absolute after:bg-black after:w-full after:h-[2px] after:block after:top-8 after:left-0 after:transition-all after:duration-300">
+                        class="relative px-1 after:absolute after:left-0 after:top-8 after:block after:h-[2px] after:w-full after:bg-black after:transition-all after:duration-300">
                         <svg @click="actionNav = ! actionNav" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px"
                             class="cursor-pointer hover:fill-black" viewBox="0 0 512 512">
                             <path
@@ -37,11 +38,11 @@
                                 data-original="#000000" />
                         </svg>
                         <div x-show="actionNav" @click.outside="actionNav = false" id="profile-dropdown-menu"
-                            class="bg-white block z-20 shadow-lg py-6 px-6 rounded sm:min-w-[320px] max-sm:min-w-[250px] absolute right-0 top-10">
-                            <h6 class="font-semibold text-[15px]">Welcome</h6>
-                            <p class="text-sm text-gray-500 mt-1">Manage 900 Events,Flight Order, Shortlet Listing and Hotel Booking  </p>
+                            class="absolute right-0 top-10 z-20 block rounded bg-white px-6 py-6 shadow-lg max-sm:min-w-[250px] sm:min-w-[320px]">
+                            <h6 class="text-[15px] font-semibold">Welcome</h6>
+                            <p class="mt-1 text-sm text-gray-500">Manage 900 Events,Flight Order, Shortlet Listing and Hotel Booking  </p>
 
-                            <form class="bg-transparent border border-gray-300 hover:border-black rounded px-4 py-2 mt-4 text-sm text-black" method="POST" action="{{ route('logout') }}">
+                            <form class="mt-4 rounded border border-gray-300 bg-transparent px-4 py-2 text-sm text-black hover:border-black" method="POST" action="{{ route('logout') }}">
                             @csrf
 
                             <button class="text-[1rem]" type="submit">
@@ -50,7 +51,7 @@
                         </form>
 
 
-                            {{-- <hr class="border-b-0 my-4" /> --}}
+                            {{-- <hr class="my-4 border-b-0" /> --}}
                             <ul class="hidden space-y-1.5">
                                 <li><a href='javascript:void(0)'
                                         class="text-sm text-gray-500 hover:text-black">Order</a></li>
@@ -62,7 +63,7 @@
                                         Us</a></li>
                             </ul>
 
-                            {{-- <hr class="border-b-0 my-4" /> --}}
+                            {{-- <hr class="my-4 border-b-0" /> --}}
                             <ul class="hidden space-y-1.5">
                                 <li><a href='javascript:void(0)'
                                         class="text-sm text-gray-500 hover:text-black">Coupons</a></li>
@@ -82,14 +83,14 @@
         </div>
     </header>
 
-    <section x-data='{manageNav: false}' class="md:px-10 px-3 py-3 ">
+    <section x-data='{manageNav: false}' class="px-3 py-3 md:px-10">
         {{-- Grid Container --}}
         <div class="admin-grid">
             {{-- Grid Section One --}}
-            <div class="adminGridSectionOne md:block hidden mt-4">
-                <ul class="flex flex-col gap-y-2 md:w-[70%] ">
+            <div class="adminGridSectionOne mt-4 hidden md:block">
+                <ul class="flex flex-col gap-y-2 md:w-[70%]">
 
-                    <li x-data="{ actionNavOne: false }" class="py-2 px-1 relative bg-slate-300 hover:bg-slate-100 rounded-sm">
+                    <li x-data="{ actionNavOne: false }" class="relative rounded-sm bg-slate-300 px-1 py-2 hover:bg-slate-100">
                         <a @click="actionNavOne = ! actionNavOne" href="javascript:void(0)" class="flex items-center gap-1">
                             <img class="hidden" src="{{ asset('image/manage-icon.svg') }}" alt="lorem ipsum">
                             <span class="font-[600]">
@@ -115,7 +116,7 @@
                         </div>
                     </li>
 
-                    <li x-data="{ actionNavII: false }" class="py-2 px-1 relative bg-slate-300 hover:bg-slate-100 rounded-sm">
+                    <li x-data="{ actionNavII: false }" class="relative rounded-sm bg-slate-300 px-1 py-2 hover:bg-slate-100">
                         <a @click="actionNavII = ! actionNavII" href="javascript:void(0)" class="flex items-center gap-1">
                             <img class="hidden" src="{{ asset('image/manage-icon.svg') }}" alt="lorem ipsum">
                             <span class="font-[600]">
@@ -149,7 +150,7 @@
                         </div>
                     </li>
 
-                    <li x-data="{ actionNavIII: false }" class="py-2 px-1 relative bg-slate-300 hover:bg-slate-100 rounded-sm">
+                    <li x-data="{ actionNavIII: false }" class="relative rounded-sm bg-slate-300 px-1 py-2 hover:bg-slate-100">
                         <a @click="actionNavIII = ! actionNavIII" href="javascript:void(0)" class="flex items-center gap-1">
                             <img class="hidden" src="{{ asset('image/manage-icon.svg') }}" alt="lorem ipsum">
                             <span class="font-[600]">
@@ -175,7 +176,7 @@
                         </div>
                     </li>
 
-                    <li x-data="{ actionNavIV: false }" class="py-2 px-1 relative bg-slate-300 hover:bg-slate-100 rounded-sm">
+                    <li x-data="{ actionNavIV: false }" class="relative rounded-sm bg-slate-300 px-1 py-2 hover:bg-slate-100">
                         <a @click="actionNavIV = ! actionNavIV" href="javascript:void(0)" class="flex items-center gap-1">
                             <img class="hidden" src="{{ asset('image/manage-icon.svg') }}" alt="lorem ipsum">
                             <span class="font-[600]">
@@ -201,7 +202,7 @@
                         </div>
                     </li>
 
-                    <li x-data="{ actionNavV: false }" class="py-2 px-1 relative bg-slate-300 hover:bg-slate-100 rounded-sm">
+                    <li x-data="{ actionNavV: false }" class="relative rounded-sm bg-slate-300 px-1 py-2 hover:bg-slate-100">
                         <a @click="actionNavV = ! actionNavV" href="javascript:void(0)" class="flex items-center gap-1">
                             <img class="hidden" src="{{ asset('image/manage-icon.svg') }}" alt="lorem ipsum">
                             <span class="font-[600]">
@@ -235,10 +236,10 @@
                 </ul>
             </div>
 
-            <div x-transition x-show="manageNav" @click.outside="manageNav = false" class="adminGridSectionOne md:hidden inline-block">
-                <ul class="flex flex-col gap-y-2 md:w-[70%] ">
+            <div x-transition x-show="manageNav" @click.outside="manageNav = false" class="adminGridSectionOne inline-block md:hidden">
+                <ul class="flex flex-col gap-y-2 md:w-[70%]">
 
-                    <li x-data="{ actionNavOne: false }" class="py-2 px-1 relative bg-slate-300 hover:bg-slate-100 rounded-sm">
+                    <li x-data="{ actionNavOne: false }" class="relative rounded-sm bg-slate-300 px-1 py-2 hover:bg-slate-100">
                         <a @click="actionNavOne = ! actionNavOne" href="javascript:void(0)" class="flex items-center gap-1">
                             <img class="hidden" src="{{ asset('image/manage-icon.svg') }}" alt="lorem ipsum">
                             <span class="font-[600]">
@@ -264,7 +265,7 @@
                         </div>
                     </li>
 
-                    <li x-data="{ actionNavII: false }" class="py-2 px-1 relative bg-slate-300 hover:bg-slate-100 rounded-sm">
+                    <li x-data="{ actionNavII: false }" class="relative rounded-sm bg-slate-300 px-1 py-2 hover:bg-slate-100">
                         <a @click="actionNavII = ! actionNavII" href="javascript:void(0)" class="flex items-center gap-1">
                             <img class="hidden" src="{{ asset('image/manage-icon.svg') }}" alt="lorem ipsum">
                             <span class="font-[600]">
@@ -301,7 +302,7 @@
                         </div>
                     </li>
 
-                    <li x-data="{ actionNavIII: false }" class="py-2 px-1 relative bg-slate-300 hover:bg-slate-100 rounded-sm">
+                    <li x-data="{ actionNavIII: false }" class="relative rounded-sm bg-slate-300 px-1 py-2 hover:bg-slate-100">
                         <a @click="actionNavIII = ! actionNavIII" href="javascript:void(0)" class="flex items-center gap-1">
                             <img class="hidden" src="{{ asset('image/manage-icon.svg') }}" alt="lorem ipsum">
                             <span class="font-[600]">
@@ -327,7 +328,7 @@
                         </div>
                     </li>
 
-                    <li x-data="{ actionNavIV: false }" class="py-2 px-1 relative bg-slate-300 hover:bg-slate-100 rounded-sm">
+                    <li x-data="{ actionNavIV: false }" class="relative rounded-sm bg-slate-300 px-1 py-2 hover:bg-slate-100">
                         <a @click="actionNavIV = ! actionNavIV" href="javascript:void(0)" class="flex items-center gap-1">
                             <img class="hidden" src="{{ asset('image/manage-icon.svg') }}" alt="lorem ipsum">
                             <span class="font-[600]">
@@ -353,7 +354,7 @@
                         </div>
                     </li>
 
-                    <li x-data="{ actionNavV: false }" class="py-2 px-1 relative bg-slate-300 hover:bg-slate-100 rounded-sm">
+                    <li x-data="{ actionNavV: false }" class="relative rounded-sm bg-slate-300 px-1 py-2 hover:bg-slate-100">
                         <a @click="actionNavV = ! actionNavV" href="javascript:void(0)" class="flex items-center gap-1">
                             <img class="hidden" src="{{ asset('image/manage-icon.svg') }}" alt="lorem ipsum">
                             <span class="font-[600]">
