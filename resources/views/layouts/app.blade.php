@@ -651,11 +651,7 @@
                 </div>
                 <div class="flex items-center gap-2 rounded-md py-2 hover:bg-gray-200">
                     <img class="w-[25px]" src="{{ asset('image/shortlet.svg') }}" alt="Flights Icon">
-<<<<<<< HEAD
                     <a href="{{route('shortlet.index')}}" class="">Shortlet Rentals</a>
-=======
-                    <a href="/shortlet" class="">Shortlet Rentals</a>
->>>>>>> d16c73fbe57fedbee6e73f795673cca5bf709462
                 </div>
             </div>
 
@@ -797,11 +793,7 @@
                                 </div>
                                 <div
                                     class="flex items-center justify-center rounded-md border border-gray-200 bg-white px-5 py-4 shadow shadow-gray-300 ease-in-out hover:scale-[1.1] hover:bg-slate-100 hover:shadow-md md:px-[2rem]">
-<<<<<<< HEAD
                                     <a class="flex flex-col items-center justify-center" href="{{route('shortlet.index')}}">
-=======
-                                    <a class="flex flex-col items-center justify-center" href="javascript:void(0)">
->>>>>>> d16c73fbe57fedbee6e73f795673cca5bf709462
                                         <img class="w-[35px]" src="{{ asset('image/icons/shortlet-alt.svg') }}"
                                             alt="lorem ipsum">
                                         <span class="inline-block text-center text-sm font-[700]">
@@ -1080,6 +1072,9 @@
                             <li>
                                 <a href="{{ route('index.terms-and-conditions') }}" class="hover:underline">Terms and
                                     Conditions</a>
+                            </li>
+                            <li>
+                                <a href="{{route('validate.e-ticket.index')}}" class="hover:underline">Verify Party Ticket</a>
                             </li>
                             <li>
                                 <a href="" class="hover:underline">Flights Schedules</a>

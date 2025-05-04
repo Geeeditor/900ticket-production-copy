@@ -19,32 +19,55 @@ use App\Http\Controllers\Transactions\Payments\PartyTicketPayments;
 //     return redirect()->route('index');
 // });
 
-Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+// Route::get('/home' , function () {
+//     return view('home');
+// })->name('home');
+
 
 Route::get('/', function () {
         return redirect()->route('index');
-    });
+});
 
+Route::get('/welcome', function () {
+    $events = Event::latest()->paginate(3);
 
+    if (Auth::check() && Auth::user()->usertype == 'user') {
+            return redirect()->route('dashboard')->with(['regsuccess'=> 'Welcome to 900ticket', 'firstname' => Auth::user()->firstname, 'lastname' => Auth::user()->lastname]);
+        }
 
+    elseif (Auth::check() && Auth::user()->usertype == 'admin') {
 
-Route::get('/home' , function () {
-    return view('home');
-})->name('home');
+        return redirect()->route('admin.index')->with(['regsuccess'=> 'Welcome to 900ticket', 'firstname' => Auth::user()->firstname, 'lastname' => Auth::user()->lastname]);
+
+    }
+
+    else {
+       return view('welcome', ['events' => $events]);
+    }
+})->name('index');
+
+// Party Ticket Route
+Route::get('/event', function () {
+    $latestEvents = Event::latest()->take(18)->paginate(3); // Get the latest 18 posts as a collection
+    $featuredEvents = Event::where('category', 'featured')->latest()->paginate(3); // Get featured events with pagination
+    $allEvents = Event::paginate(3); // Paginate all events
+
+    return view('pages.events.index', compact('latestEvents', 'featuredEvents', 'allEvents'));
+})->name('event.index');
 
 Route::post('/event/item', [CartController::class, 'storePartyTicket'])->name('event.addtocart');
 
+Route::get('/validate/ticket', [EventsController::class, 'searchTicket'] )->name('validate.e-ticket.index');
 
-
-Route::fallback(function() {
-    return view('fallback');
-});
+Route::post('/validate/ticket/result', [EventsController::class, 'resultTicket'] )->name('validate.e-ticket.result');
 
 Route::get('/shortlet', [Shortletlisting::class, 'index'])->name('shortlet.index');
 
 Route::get('/private-policy', function () {
     return 'Privacy Policy';
 })->name('index.privacy-policy');
+
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 
 Route::get('/terms-and-conditions', function () {
     return 'Terms and Conditions';
@@ -66,50 +89,19 @@ Route::post('/register/otp/product/checkout', [DynamicRegister::class, 'register
 Route::post('/register/resend-otp/product/checkout', [DynamicRegister::class, 'resendOtp'])
     ->name('modal.checkout.register.otp.resend');
 
+Route::post('/product/checkout', [Checkout::class, 'getPartyTicketOrder'])->name('checkout.getOrder');
 
-
-
-
-
-
-
-Route::get('/welcome', function () {
-
-    $events = Event::latest()->paginate(3);
-
-    if (Auth::check() && Auth::user()->usertype == 'user') {
-            return redirect()->route('dashboard')->with(['regsuccess'=> 'Welcome to 900ticket', 'firstname' => Auth::user()->firstname, 'lastname' => Auth::user()->lastname]);
-        }
-
-    elseif (Auth::check() && Auth::user()->usertype == 'admin') {
-
-        return redirect()->route('admin.index')->with(['regsuccess'=> 'Welcome to 900ticket', 'firstname' => Auth::user()->firstname, 'lastname' => Auth::user()->lastname]);
-
-    }
-
-    else {
-       return view('welcome', ['events' => $events]);
-    }
-}
-    )->name('index');
 
 
 // User Routes
-  Route::post('/product/checkout', [Checkout::class, 'getPartyTicketOrder'])->name('checkout.getOrder');
-
-   Route::delete('/party-ticket-cart/delete/{id}', [CartController::class, 'destroy'])->name('party-ticket.cart.delete');
-
-   Route::delete('/cart/delete', [CartController::class, 'emptyCart'])->name('cart.empty');
-
-    Route::middleware('user')->group(function () {
-    Route::get('/product/checkout/{event}', [Checkout::class, 'checkoutPartyTicket'])->name('checkout.index');
-
-
+Route::middleware('user')->group(function () {
 
     Route::get('/dashboard', function () {
         $events = Event::latest()->paginate(3);
         return view('dashboard', ['events' => $events]);
     })->name('dashboard');
+
+    Route::get('/product/checkout/{event}', [Checkout::class, 'checkoutPartyTicket'])->name('checkout.index');
 
     Route::post('/payment', [PartyTicketPayments::class, 'pay'])->name('payment.pay');
 
@@ -117,13 +109,13 @@ Route::get('/welcome', function () {
 
     Route::get('/payment/summary/{id}', [TransactionHistory::class, 'paymentSummary'])->name('payment.summary');
 
-    // Route::get('/download/party-ticket/{id}', [TransactionHistory::class, 'downloadPartyTicket'])->name('payment.download');
-
     Route::get('/download/party-ticket/{id}', [TransactionHistory::class, 'downloadPartyTicket'])->name('payment.download');
 
     Route::get('/transactions', [TransactionHistory::class, 'index'])->name('index.transaction');
 
+    Route::delete('/party-ticket-cart/delete/{id}', [CartController::class, 'destroy'])->name('party-ticket.cart.delete');
 
+    Route::delete('/cart/delete', [CartController::class, 'emptyCart'])->name('cart.empty');
 });
 
 Route::middleware(['admin','web'])->group(function() {
@@ -150,28 +142,6 @@ Route::middleware(['admin','web'])->group(function() {
 
 });
 
-
-
-/* Route::get('/admin', function () {
-    return view('dashboard');
-})->middleware(['auth', 'admin'])->name('dashboard'); */
-
-
-
-// Route::get('/events/latest', [EventsController::class, 'showEvents'])->name('events.index');
-
-// Route::get('/events/latest', [EventsController::class, 'showEvents'])->name('events.index');
-
-Route::get('/event', function () {
-    $latestEvents = Event::latest()->take(18)->paginate(3); // Get the latest 18 posts as a collection
-    $featuredEvents = Event::where('category', 'featured')->latest()->paginate(3); // Get featured events with pagination
-    $allEvents = Event::paginate(3); // Paginate all events
-
-    return view('pages.events.index', compact('latestEvents', 'featuredEvents', 'allEvents'));
-
-    // dd($latestEvents, $featuredEvents, $allEvents);
-})->name('event.index');
-
 Route::get('/event/item/{event}', function (Event $event) {
 
     if (!$event) {
@@ -180,14 +150,6 @@ Route::get('/event/item/{event}', function (Event $event) {
     // dd($event);
     return view('pages.events.metadata', ['event' => $event]);
 })->name('event.metadata');
-
-// Route::get('/event', function () {
-//     return view('pages\events\');
-// })->name('event.index');
-
-
-
-// Route::get('/events/view/{id}', [EventsController::class, 'viewEvents'])->name('events.view');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
