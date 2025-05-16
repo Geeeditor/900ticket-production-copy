@@ -189,13 +189,18 @@
                             class="relative bg-slate-200 px-1">
                             <ul class="flex flex-col gap-y-1 py-2">
                                 <li class="hover:font-[600]">
-                                    <a href="">
-                                        Update Admin Password
+                                    <a href="{{route('admin.shortlet.create')}}">
+                                        Create a Shortlet Listng
                                     </a>
                                 </li>
                                 <li class="hover:font-[600]">
                                     <a href="">
-                                        Reset Password
+                                        Update a Shortlet Listing
+                                    </a>
+                                </li>
+                                <li class="hover:font-[600]">
+                                    <a href="">
+                                        Manage Shortlet Listing 
                                     </a>
                                 </li>
                             </ul>

@@ -57,6 +57,11 @@ class User extends Authenticatable
         return $this->hasMany(Event::class);
     }
 
+    public function shortlet(): HasMany
+    {
+        return $this->hasMany(Shortlet::class);
+    }
+
      /**
      * Get the items associated with the Cart
      *

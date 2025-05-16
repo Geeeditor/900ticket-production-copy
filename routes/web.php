@@ -12,6 +12,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController\HomeController;
 use App\Http\Controllers\AdminController\EventController;
 use App\Http\Controllers\Transactions\TransactionHistory;
+use App\Http\Controllers\AdminController\ShortletController;
 use App\Http\Controllers\Transactions\Payments\PartyTicketPayments;
 // use App\Http\Controllers\Transactions\PartyTicketPayments\PartyTicketPaymentController;
 
@@ -92,6 +93,9 @@ Route::post('/register/resend-otp/product/checkout', [DynamicRegister::class, 'r
 Route::post('/product/checkout', [Checkout::class, 'getPartyTicketOrder'])->name('checkout.getOrder');
 
 
+// To be sorted
+
+
 
 // User Routes
 Route::middleware('user')->group(function () {
@@ -135,6 +139,12 @@ Route::middleware(['admin','web'])->group(function() {
     Route::get('/admin/events/edit/{id}', [EventController::class, 'edit'])->name('admin.events.edit');
 
     Route::put('/admin/events/update/{id}', [EventController::class, 'update'])->name('admin.events.edit.update');
+
+
+    Route::get('/admin/shortlet/create', [ShortletController::class, 'create'])->name('admin.shortlet.create') ;
+ 
+    Route::post('/admin/shortlet/create/store', [ShortletController::class, 'store'])->name('admin.shortlet.store');
+
 
     Route::get('/admin/manage-users', [HomeController::class, 'userList'])->name('admin.users');
 
