@@ -42,7 +42,7 @@ class EventController extends Controller
         // dd($data);
 
         if (Auth::user()->usertype === 'admin') {
-            
+
 
             if ($request->hasFile('hero_image')) {
                 $heroImage = $request->file('hero_image');
@@ -52,7 +52,7 @@ class EventController extends Controller
             // dd('Event Validated');
             $admin = Auth::user(); //  using Laravel's authentication
 
-         
+
 
             $eventRef = '900Tickets/event/' . Str::random(4) . substr(time(), 6,8) . Str::random(4);
 

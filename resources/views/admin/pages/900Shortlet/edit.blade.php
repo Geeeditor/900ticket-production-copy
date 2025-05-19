@@ -1,12 +1,14 @@
 @extends('layouts.admin')
 
-@section('title', 'Create a Shortlet')
+@section('title', 'Update a Shortlet')
 
 @section('content')
 
-    '<form method="post" action="" class="mx-auto flex max-w-4xl flex-col gap-4 p-5 font-sans"
-        enctype="multipart/form-data">
+    <form method="post" action="{{route('admin.shortlet.edit.update', [ 'id' => $shortlet->id ])}}" class="mx-auto flex max-w-4xl flex-col gap-4 p-5 font-sans"
+        enctype="multipart/form-data" >
         @csrf
+
+        @method('PUT')
         <div class="mb-5 text-center text-2xl font-bold">
             UPDATE SHORTLET LISTING
         </div>
@@ -36,7 +38,9 @@
                     placeholder="Where's this apartment located" />
                 <span class="text-xs text-gray-500">Provide an apartment address (required)</span>
                 @error('address')
-                    <div class="mt-1 text-xs text-red-500">{{ $message }}</div>
+                    <div class="mt-1 text-xs text-red-500">
+                        {{ $message }}
+                    </div>
                 @enderror
             </div>
 
@@ -45,7 +49,9 @@
                     class="w-full rounded border bg-gray-100 px-4 py-3 text-sm text-black transition focus:border-red-500 focus:ring-red-500">{{ old('description') ? old('description') : $shortlet->description }}</textarea>
                 <span class="text-xs text-gray-500">Provide detailed apartment description (required)</span>
                 @error('description')
-                    <div class="mt-1 text-xs text-red-500">{{ $message }}</div>
+                    <div class="mt-1 text-xs text-red-500">
+                        {{ $message }}
+                    </div>
                 @enderror
             </div>
 
@@ -102,9 +108,9 @@
 
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
             <div class="relative">
-                <select
-                    class="w-full rounded border bg-gray-100 px-4 py-3 text-sm text-black transition focus:border-red-500 focus:ring-red-500"
+                <select class="w-full rounded border bg-gray-100 px-4 py-3 text-sm text-black transition focus:border-red-500 focus:ring-red-500"
                     name="apartment_type" id="">
+
                     <option value="{{ old('apartment_type') ? old('apartment_type') : 'loft' }}"
                         {{ $shortlet->apartment_type !== 'loft' ? '' : 'selected' }}>Loft</option>
                     <option value="{{ old('apartment_type') ? old('apartment_type') : 'Garden apartment' }}"
@@ -133,7 +139,9 @@
                         {{ $shortlet->apartment_type !== 'Low rise apartments' ? '' : 'selected' }}>Low rise apartments
                     </option>
                     <option value="{{ old('apartment_type') ? old('apartment_type') : 'BHK apartment' }}"
-                        {{ $shortlet->apartment_type !== 'BHK apartment' ? '' : 'selected' }}>BHK apartment</option>
+                        {{ $shortlet->apartment_type !== 'BHK apartment' ? '' : 'selected' }}>
+                        BHK apartment
+                    </option>
                     <option value="{{ old('apartment_type') ? old('apartment_type') : 'Walkup' }}"
                         {{ $shortlet->apartment_type !== 'Walkup' ? '' : 'selected' }}>Walkup</option>
                     <option value="{{ old('apartment_type') ? old('apartment_type') : 'Basement' }}"
@@ -183,17 +191,15 @@
             </div>
 
             <div class="relative">
-                <select
-                    class="w-full rounded border bg-gray-100 px-4 py-3 text-sm text-black transition focus:border-red-500 focus:ring-red-500"
-                    name="apartment_availablity" id="">
-                    <option value="Self-Check-in" {{ $shortlet->apartment_availability == `1` ? 'selected' : '' }}>Yes
-                    </option>
-                    <option value="Online Check-in" {{ $shortlet->apartment_availability == `1` ? 'selected' : '' }}>No
-                    </option>
-
-
-                </select>
+                <select class="w-full rounded border bg-gray-100 px-4 py-3 text-sm text-black transition focus:border-red-500 focus:ring-red-500"
+                name="apartment_availability" id="">
+                <option value="1" {{ $shortlet->apartment_availability == '1' ? 'selected' : '' }}>Yes</option>
+                <option value="0" {{ $shortlet->apartment_availability == '0' ? 'selected' : '' }}>No</option>
+            </select>
                 <span class="text-xs text-gray-500">Is this apartment available for rent? (optional)</span>
+                @error('apartment_availability')
+                    <div class="mt-1 text-xs text-red-500">{{ $message }}</div>
+                @enderror
             </div>
 
             <div class="relative">
@@ -213,15 +219,15 @@
 
             <div class="relative">
                 @php
-                    $image = $shortlet->images === null ? [] : $shortlet->images;
+                    $image = $shortlet->images === null ? [] : json_decode($shortlet->images);
                 @endphp
 
                 <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
-                    @foreach ($image as $imageName)
+                    @foreach($image as $imageName)
                         <div class="aspect-w-1 aspect-h-1">
-                            <img src="{{ asset('/image/shortlet/' . basename($imageName)) }}" alt="Image"
-                                class="object-cover">
+                            <img src="{{ asset('/image/shortlet/' . basename($imageName)) }}" alt="Image" class="object-cover">
                         </div>
+                        <input class="h-[15px]" type="checkbox" name="deleted_image[]" value="{{ $imageName }}"> Delete Image
                     @endforeach
                 </div>
 
@@ -235,39 +241,52 @@
             </div>
         </div>
 
-
-
-
         <div class="flex flex-col items-center justify-center gap-4 md:flex-row">
-            {{--    <button type="button" id="generate-passcode"
-            class="w-full rounded border border-white bg-blue-600 px-6 py-2.5 text-sm text-white transition hover:bg-blue-500 md:w-1/2">Generate
-            Ticket Passcode</button> --}}
 
             <button type="submit"
-                class="w-full rounded border border-white bg-red-600 px-6 py-2.5 text-sm text-white transition hover:bg-red-500 md:w-1/2">Update
-                Shortlet Listing</button>
+                class="w-full rounded border border-white bg-red-600 px-6 py-2.5 text-sm text-white transition hover:bg-red-500 md:w-1/2">
+                Update Shortlet Listing
+            </button>
+
         </div>
+
          <script>
-        document.getElementById('guest').addEventListener('change', function() {
-            var guestValue = this.value;
-            var maxGuestInput = document.querySelector('input[name="max_guest"]');
-            var maxGuestDiv = document.getElementById('max_guest');
+            document.getElementById('guest').addEventListener('change', function() {
+                let guestValue = this.value;
 
-            if (parseInt(maxGuestInput.value) > 1) {
-                guestValue = 'true';
-            }
+                /* var e = document.getElementById("ddlViewBy");
+                var value = e.value;
+                var text = e.options[e.selectedIndex].text; */
 
-            if (guestValue === 'true') {
-                maxGuestDiv.classList.remove('hidden');
-            } else {
-                maxGuestDiv.classList.add('hidden');
-                maxGuestInput.value = ''; // Clear the input value
-            }
-        });
-    </script>
+                const e = document.getElementById("guest");
+                const valueI = e.value;
+                console.log(valueI);
+
+                const maxGuestInput = document.querySelector('input[name="max_guest"]');
+                const maxGuestDiv = document.getElementById('max_guest');
+
+                if (parseInt(maxGuestInput.value) > 1) {
+                    guestValue = 'true';
+                }
+
+                if (guestValue === 'true') {
+                    maxGuestDiv.classList.remove('hidden');
+                } else {
+                    maxGuestDiv.classList.add('hidden');
+                    maxGuestInput.value = ''; // Clear the input value
+                }
+
+                if (valueI === 'false') {
+                    maxGuestDiv.classList.add('hidden');
+                    maxGuestInput.value = ''; // Clear the input value
+                } else {
+
+                }
+            });
+        </script>
     </form>
 
-   
+
 
 
 @endsection
