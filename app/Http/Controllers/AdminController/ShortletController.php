@@ -13,8 +13,9 @@ class ShortletController extends Controller
 {
     //
 
-    public function index () {
-        return view ('pages.admin.900Shortlet.create');
+    public function index (Shortlet $shortlet) {
+        $shortlet = Shortlet::latest()->get();
+        return view ('admin.pages.900Shortlet.index', ['shortlet' => $shortlet]);
     }
 
     public function create () {

@@ -699,8 +699,8 @@
 
             <div class="mt-4 flex w-full flex-col gap-2 border-t border-gray-300 py-2">
                 <div class="flex items-center gap-2 rounded-md py-2 hover:bg-gray-200">
-                    <img class="w-[25px]" src="{{ asset('image/sideBar/Whatsapp.png') }}" alt="Flights Icon">
-                    <a href="" class="">Reach us on Whatsapp</a>
+                                        <img class="w-[25px]" src="{{ asset('image/sideBar/Whatsapp.png') }}" alt="Flights Icon">
+                    <a href="https://wa.me/message/QRPWQ5NTACXGO1" class="">Reach us on Whatsapp</a>
                 </div>
                 <div class="flex items-center gap-2 rounded-md py-2 hover:bg-gray-200">
                     <img class="w-[25px]" src="{{ asset('image/sideBar/Vector (5).png') }}" alt="Flights Icon">

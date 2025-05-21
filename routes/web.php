@@ -126,6 +126,7 @@ Route::middleware(['admin','web'])->group(function() {
 
     Route::get('/admin', [HomeController::class, 'dashboard'])->name('admin.index');
 
+    // Party Ticket Endpoints
     Route::get('/admin/events/create', [EventController::class, 'create'])->name('admin.create.event');
 
     Route::post('/admin/events/create/store', [EventController::class, 'store'])->name('admin.create.store');
@@ -140,20 +141,28 @@ Route::middleware(['admin','web'])->group(function() {
 
     Route::put('/admin/events/update/{id}', [EventController::class, 'update'])->name('admin.events.edit.update');
 
+    Route::delete('/admin/events/delete/{id}', [EventController::class, 'destroy'])->name('admin.events.delete');
+
+    // Shortlet Endpoint
     Route::get('/admin/shortlet/create', [ShortletController::class, 'create'])->name('admin.shortlet.create');
 
     Route::post('/admin/shortlet/create/store', [ShortletController::class, 'store'])->name('admin.shortlet.store');
 
     Route::get('/admin/shortlet/edit/{id}', [ShortletController::class, 'edit'])->name('admin.shortlet.edit');
 
-    Route::delete('/admin/events/delete/{id}', [EventController::class, 'destroy'])->name('admin.events.delete');
-
-
     Route::put('/admin/shortlet/edit/update/{id}', [ShortletController::class, 'update'])->name('admin.shortlet.edit.update');
+
+    Route::get('/admin/shortlet/view', [ShortletController::class, 'index'])->name('admin.shortlet.view');
+
+
 
     Route::delete('/admin/events/delete/{id}', [ShortletController::class, 'destroy'])->name('admin.shortlet.delete');
 
+    // Flight Booking Endpoint
 
+    // Hotel Booking Endpoin
+
+    // Manage Users Endpoint
     Route::get('/admin/manage-users', [HomeController::class, 'userList'])->name('admin.users');
 
 
