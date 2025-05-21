@@ -194,13 +194,13 @@
                                     </a>
                                 </li>
                                 <li class="hover:font-[600]">
-                                    <a href="">
+                                    <a href="{{route('admin.shortlet.view')}}">
                                         Update a Shortlet Listing
                                     </a>
                                 </li>
                                 <li class="hover:font-[600]">
-                                    <a href="">
-                                        Manage Shortlet Listing 
+                                    <a href="{{route('admin.shortlet.view')}}">
+                                        Manage Shortlet Listing
                                     </a>
                                 </li>
                             </ul>
