@@ -9,6 +9,7 @@ use App\Http\Controllers\DynamicRegister;
 use App\Http\Controllers\Shortletlisting;
 use App\Http\Controllers\EventsController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\AdminController\HomeController;
 use App\Http\Controllers\AdminController\EventController;
 use App\Http\Controllers\Transactions\TransactionHistory;
@@ -104,6 +105,14 @@ Route::middleware('user')->group(function () {
         $events = Event::latest()->paginate(3);
         return view('dashboard', ['events' => $events]);
     })->name('dashboard');
+
+    Route::get('/dashboard/profile', [UserProfileController::class, 'index'])->name('dashboard.profile');
+
+    Route::put('/dashboard/profile/update', [UserProfileController::class, 'update'])->name('dashboard.profile.update');
+
+    Route::put('/dashboard/profile/password', [UserProfileController::class, 'updatePassword'])->name('dashboard.profile.update.password');
+
+    Route::delete('/dashboard/profile/terminate', [UserProfileController::class, 'destroy'])->name('dashboard.profile.destroy');
 
     Route::get('/product/checkout/{event}', [Checkout::class, 'checkoutPartyTicket'])->name('checkout.index');
 

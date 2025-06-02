@@ -8,6 +8,7 @@
 @endsection
 
 @section('content')
+
     <main class="mx-auto w-full">
         <section
             class="m-1 mx-auto flex items-center justify-center rounded-b-md bg-white p-1 py-4 shadow-lg md:w-[80%] md:px-8 md:py-8">
@@ -59,6 +60,7 @@
                                     @enderror
                                 </span>
                             </div>
+                            <input type="text" name="g-recaptcha-response" value="user" hidden>
 
                             <div class="login-field flex flex-col gap-1">
                                 <label class="font-[500]" for="lastName">Surname</label>
@@ -96,6 +98,27 @@
                             </div>
 
                             <div class="login-field flex flex-col gap-1">
+                                <select class="my-2 w-full border border-gray-200 px-2 py-2 md:border-2" name="gender"
+                                    id="">
+                                    <option value="none" selected>None</option>
+                                    <option value="male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                            </div>
+
+                            <div class="login-field flex flex-col gap-1">
+                                <label class="font-[500]" for="age">Date of Birth</label>
+                                <input title="Eg: mark@yokomail.com"
+                                    class="my-2 w-full border border-gray-200 px-2 py-2 md:border-2" type="date"
+                                    name="age" value="{{ old('age') }}">
+                                <span class="text-[12px] font-[200] text-red-700">
+                                    @error('age')
+                                        {{ $message }}
+                                    @enderror
+                                </span>
+                            </div>
+
+                            <div class="login-field flex flex-col gap-1">
                                 <label class="font-[500]" for="email">Phone Number</label>
                                 <div class="relative my-2 w-full border border-gray-200 px-2 py-2 md:border-2">
                                     <div
@@ -126,7 +149,8 @@
                                         placeholder="Enter your password" />
                                     <div id=""
                                         class="password-visibility togglePassword absolute right-[5px] top-[17px] cursor-pointer">
-                                        <img class="h-[25px]" src="{{ asset('image/eye.svg') }}" alt="Toggle visibility">
+                                        <img class="h-[25px]" src="{{ asset('image/eye.svg') }}"
+                                            alt="Toggle visibility">
                                         <div id="" class="stroke"></div>
                                     </div>
                                 </div>
@@ -157,18 +181,19 @@
                                     @enderror
                                 </span>
                             </div>
+                            <div class="g-recaptcha" data-sitekey="6LddiEkrAAAAAEeC0OgrYY9NpHAnA6iVGn21iOV9"></div>
 
-                            <button
-                                class="hover:red-alt-800 submit w-full rounded-md bg-red-700 px-2 py-2 text-start uppercase text-white hover:bg-red-900"
-                                type="submit">
-                                Create an Account
-                            </button>
+
+                            <input class="hover:red-alt-800 submit w-full rounded-md bg-red-700 px-2 py-2 text-start uppercase text-white hover:bg-red-900" type="submit" value="Submit">
                         </form>
+
+
 
                         <p class="my-2 text-center text-sm md:text-left"> By signing in or registering I confirm that I
                             have read and agreed to
-                            900Tickets <a class="text-red-500" href="{{ route('index.terms-and-conditions') }}">terms and conditions</a> and <a
-                                class="text-red-500" href="{{ route('index.privacy-policy') }}">privacy policy</a>
+                            900Tickets <a class="text-red-500" href="{{ route('index.terms-and-conditions') }}">terms and
+                                conditions</a> and <a class="text-red-500"
+                                href="{{ route('index.privacy-policy') }}">privacy policy</a>
                         </p>
                     </div>
                 </div>

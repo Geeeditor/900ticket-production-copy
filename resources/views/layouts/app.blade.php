@@ -4,6 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://www.google.com/recaptcha/enterprise.js?render=6LddiEkrAAAAAEeC0OgrYY9NpHAnA6iVGn21iOV9" async defer></script>
+  <!-- Your code -->
+    {{-- <script src="https://www.google.com/recaptcha/api.js" ></script> --}}
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://kit.fontawesome.com/a21ee8a7f1.js" crossorigin="anonymous"></script>
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
@@ -225,7 +228,7 @@
 
 </head>
 
-<body x-data="{ sideNav: false }" class="relative bg-[#FFF5F5]">
+<body x-data="{ sideNav: false }" class="relative bg-[#ffeae7]">
 
     {{-- Notification Tray --}}
     {{-- @if (session()->has('success')) --}}
@@ -551,8 +554,21 @@
                                                     </a>
 
                                                 </li>
+
                                                 <li class="w-full rounded-lg py-2 pr-[10px] hover:bg-gray-200">
-                                                    <a class="flex items-center justify-start gap-[5px]" href="">
+                                                    <a class="flex items-center justify-start gap-[5px]" href="{{route('dashboard.profile')}}">
+
+                                                        <img class="w-[25px]" src="{{ asset('image/sideBar/Vector (4).png') }}" alt="Flights Icon">
+                                            <span class="block">
+                                                                                Manage Profile
+                                                                            </span>
+                                                    </a>
+
+
+                                                </li>
+
+                                                <li class="w-full rounded-lg py-2 pr-[10px] hover:bg-gray-200">
+                                                    <a class="flex items-center justify-start gap-[5px]" href="/dashboard/profile#reset">
 
                                                         <img class="h-[20px] w-[20px]"
                                                             src="{{ asset('image/reset.svg') }}" alt="Login">
@@ -683,7 +699,7 @@
                     </div>
                     <div class="flex items-center gap-2 rounded-md py-2 hover:bg-gray-200">
                         <img class="w-[25px]" src="{{ asset('image/sideBar/Vector (4).png') }}" alt="Flights Icon">
-                        <a href="" class="">Manage Profile</a>
+                        <a href="{{route('dashboard.profile')}}" class="">Manage Profile</a>
                     </div>
 
                     <div class="flex items-center gap-2 rounded-md py-2 hover:bg-gray-200">
@@ -1265,7 +1281,10 @@
         });
     </script>
 
-    <script>
+
+
+
+  </script>  <script>
         // Function to show the flash message
         function showFlashMessage() {
             const flashMessage = document.querySelector('.flash-message');
@@ -1382,10 +1401,10 @@
         });
     </script>
 
-    {{-- <script src="{{ asset('js/widget.js') }}"></script>
-    <script src="{{ asset('js/passwordValidator.js') }}"></script>
-    <script src="{{ asset('js/toogles.js') }}"></script>
-    <script src="{{ asset('js/routes.js') }}"></script> --}}
+  <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+  async defer>
+
+
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="{{ asset('js/swiper.js') }}"></script>
 </body>

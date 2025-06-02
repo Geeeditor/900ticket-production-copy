@@ -224,11 +224,17 @@
 
                 <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
                     @foreach($image as $imageName)
-                        <div class="aspect-w-1 aspect-h-1">
-                            <img src="{{ asset('/image/shortlet/' . basename($imageName)) }}" alt="Image" class="object-cover">
-                        </div>
-                        <input class="h-[15px]" type="checkbox" name="deleted_image[]" value="{{ $imageName }}"> Delete Image
+                     <div>
+                         <div class="aspect-w-1 aspect-h-1">
+                             <img src="{{ asset('/image/shortlet/' . basename($imageName)) }}" alt="Room Image" class="h-[100px] rounded-lg">
+                         </div>
+                         <div class="mt-2 flex items-center gap-2">
+                             <input class="h-[15px] w-[15px]" type="checkbox" name="deleted_image[]" value="{{ $imageName }}">
+                             <p class="text-lg font-medium capitalize">Delete Image</p>
+                         </div>
+                     </div>
                     @endforeach
+
                 </div>
 
                 <input

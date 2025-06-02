@@ -30,7 +30,10 @@ class DynamicRegister extends Controller {
             'address' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'phone' => ['required', 'string', 'max:255'],
-            'password' => ['required', Password::min(8)->mixedCase()->numbers()->symbols()],
+            'age' => ['required', 'date'],
+            'gender' => ['required', 'string'],
+            'password' => ['required', 'different:current_password', Password::min(8)->mixedCase()->numbers()->symbols()],
+            'confirm_password' => ['requierd', 'string', 'same:password']
         ]);
 
     } catch (\Illuminate\Validation\ValidationException $e) {
@@ -50,11 +53,13 @@ class DynamicRegister extends Controller {
 
     // Store user data in session
     $request->session()->put('register_firstname', $request->firstname);
-    $request->session()->put('register_lastname', $request->lastname);
-    $request->session()->put('register_address', $request->address);
-    $request->session()->put('register_email', $request->email);
-    $request->session()->put('register_phone', $request->phone);
-    $request->session()->put('register_password', Hash::make($request->password));
+        $request->session()->put('register_lastname', $request->lastname);
+        $request->session()->put('register_address', $request->address);
+        $request->session()->put('register_email', $request->email);
+        $request->session()->put('register_phone', $request->phone);
+        $request->session()->put('register_gender', $request->gender);
+        $request->session()->put('register_age', $request->age);
+        $request->session()->put('register_password', Hash::make($request->password));
 
     return redirect()->back()->with(['otp-form' => 'OTP Form', 'success' => 'OTP sent successfully!']);
 }
@@ -105,7 +110,7 @@ class DynamicRegister extends Controller {
         // Concatenate the OTP Digits
         $data = $data['otp1'] . $data['otp2'] . $data['otp3'] . $data['otp4'] . $data['otp5'] . $data['otp6'];
 
-       
+
 
         // Get previous session values
         $email = $request->session()->get('register_email');
@@ -113,6 +118,8 @@ class DynamicRegister extends Controller {
         $lastname = $request->session()->get('register_lastname');
         $address = $request->session()->get('register_address');
         $phone = $request->session()->get('register_phone');
+        $age = $request->session()->get('register_age');
+        $gender = $request->session()->get('register_gender');
         $password = $request->session()->get('register_password');
 
         $emailOtp = EmailOtp::where('email', $email)->where('otp', $data)->where('expired_at', '>=', Carbon::now())->first();
@@ -121,7 +128,7 @@ class DynamicRegister extends Controller {
             return redirect()->back()->withInput()->with(['otp-form' => 'OTP Form', 'warning' => 'Invalid or Expired OTP Provided!']);
         }
 
-        
+
 
         $user = User::create([
             'firstname'=> $firstname,
@@ -129,6 +136,8 @@ class DynamicRegister extends Controller {
             'address'=> $address,
             'email'=> $email,
             'phone'=> $phone,
+            'age'=> $age,
+            'gender'=> $gender,
             'password'=> $password,
         ]);
 
@@ -139,6 +148,8 @@ class DynamicRegister extends Controller {
         $request->session()->forget('register_firstname');
         $request->session()->forget('register_lastname');
         $request->session()->forget('register_address');
+        $request->session()->forget('register_gender');
+        $request->session()->forget('register_gender');
         $request->session()->forget('register_phone');
         $request->session()->forget('register_password');
 

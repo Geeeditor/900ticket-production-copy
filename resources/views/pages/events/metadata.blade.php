@@ -8,349 +8,367 @@
 
 
 @section('hero')
-    <div class="relative top-[0] flex h-[14vh] w-full justify-center bg-black md:h-[20vh] ">
-        <img class="h-full w-full object-cover " src="{{ asset('image/eventhero.png') }}" alt="lorem ipsum">
+    <div class="relative top-[0] flex h-[14vh] w-full justify-center bg-black md:h-[20vh]">
+        <img class="h-full w-full object-cover" src="{{ asset('image/eventhero.png') }}" alt="lorem ipsum">
         {{-- hero content --}}
         @guest
 
 
 
-            {{-- Sign in modal --}}
-            <section id="authModal" style="background-color: rgba(16, 1, 1, .2)"
-                class=" z-[997] fixed flex justify-center items-center w-full h-[106%]">
+        {{-- Sign in modal --}}
+        <section id="authModal" style="background-color: rgba(16, 1, 1, .2)"
+            class="fixed z-[997] flex h-[106%] w-full items-center justify-center">
 
 
-                <div
-                    class="{{ session()->has('otp-form') ? 'hidden' : '' }}  bg-white items-center justify-center gap-2  flex lg:w-[70%]   w-[85%] rounded-lg border border-gray-200  md:border-2">
-                    <div class="hidden lg:block">
-                        <img class="h-fit w-[600px] object-cover p-1" src="{{ asset('image/profilePoP2-v3.jpg') }}"
-                            alt="random img" />
+            <div
+                class="{{ session()->has('otp-form') ? 'hidden' : '' }}  bg-white items-center justify-center gap-2  flex lg:w-[70%]   w-[85%] rounded-lg border border-gray-200  md:border-2">
+                <div class="hidden lg:block">
+                    <img class="h-fit w-[600px] object-cover p-1" src="{{ asset('image/profilePoP2-v3.jpg') }}"
+                        alt="random img" />
+                </div>
+
+                <div class="p-2">
+                    <div id="loginform" class="{{ session()->has('register-form') ? 'hidden' : '' }}">
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="closeModal ml-[90%] size-6 text-black">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                        </svg>
+
+                        <div class="mx-auto flex w-full justify-center gap-1 text-lg font-bold uppercase md:justify-start">
+                            <p>Sign Up</p>
+                            <p>/</p>
+                            <p>Register</p>
+                        </div>
+
+                        <p class="my-2 text-center text-sm capitalize text-gray-400 md:text-left">
+                            Manage your bookings with ease and <br /> enjoy members-only benefits
+                        </p>
+
+                        <form action="{{ route('modal.checkout.login') }}" method="post">
+                            @csrf
+                            <input type="hidden" name="redirect_to" value="back">
+
+                            <div id="provideAuthEmail" class="flex flex-col">
+                                {{--     <span
+                                class="flex flex-col gap-1 text-center text-[12px] font-[200] text-red-700 md:text-start">
+
+                                <span class="block">
+                                    @error('email')
+                                        {{ $message }}
+                                    @enderror
+                                </span>
+                                <span class="block">
+                                    @error('password')
+                                        {{ $message }}
+                                    @enderror
+                                </span>
+                            </span> --}}
+
+
+                                </span>
+
+                                <label class="block text-center text-base font-bold capitalize text-black md:text-left"
+                                    for="password">Provide Email Address </label>
+
+
+                                <span id="email-error"
+                                    class="hidden text-center text-[12px] font-[200] text-red-700 md:text-start">
+                                    Email Provided incorrect!!
+                                </span>
+                                <input id="email" name="email"
+                                    class="input my-2 w-full border border-gray-200 px-2 py-2 md:border-2" type="email"
+                                    placeholder="Enter your email address" />
+                                <button type="button" id="continueToPwd"
+                                    class="my-2 w-full rounded-sm bg-red-600 py-2 capitalize text-white hover:bg-red-900">Continue</button>
+                            </div>
+                            <div id="provideAuthPwd" class="hidden">
+                                <div class="flex flex-col">
+                                    <span class="block w-full">
+                                        <label
+                                            class="input-label block w-full text-center font-bold capitalize md:text-left"
+                                            for="password">Password</label>
+                                    </span>
+                                    <div class="relative">
+                                        <input id="password" name="password"
+                                            class="input my-2 w-full border border-gray-200 px-2 py-2 md:border-2"
+                                            type="password" placeholder="Enter your password" />
+                                        <div id=""
+                                            class="password-visibility togglePassword absolute right-[5px] top-[17px] cursor-pointer">
+                                            <img class="h-[25px]" src="{{ asset('image/eye.svg') }}"
+                                                alt="Toggle visibility">
+                                            <div id="" class="stroke"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div> 
+                                    <div class="g-recaptcha" data-sitekey="6LddiEkrAAAAAEeC0OgrYY9NpHAnA6iVGn21iOV9"></div>
+                                    <div class="saveLog">
+                                        <label class="saveLoginCheckBox">
+                                            <input id="ch1" type="checkbox" name="remember">
+                                            <div class="transition"></div>
+                                        </label>
+                                        <p>Remember Me</p>
+                                    </div>
+                                   
+
+                                    <input class="hover:red-alt-800 submit w-full rounded-md bg-red-700 px-2 py-2 text-start uppercase text-white hover:bg-red-900" type="submit" value="Login">
+                                  
+                                </div>
+                            </div>
+                        </form>
+
+                        <p class="my-2 text-center uppercase md:text-left">or</p>
+                        <button
+                            class="duration-600 mx-auto flex max-w-xs items-center justify-center gap-1 rounded-lg border border-gray-300 bg-white px-5 py-2 text-sm font-bold uppercase text-gray-800 transition-transform hover:scale-105 md:mx-0 md:justify-start">
+                            Continue with Google
+                        </button>
+
+                        <p class="my-2 text-center text-sm md:text-left"> By signing in or registering I confirm that I
+                            have read and agreed to
+                            900Tickets <a class="text-red-500" href="{{route('index.terms-and-conditions')}}">terms and conditions</a> and <a
+                                class="text-red-500" href="{{route('index.privacy-policy')}}">privacy policy</a>
+                        </p>
+                        <div
+                            class="login my-2 block cursor-pointer text-center text-sm capitalize text-red-500 underline hover:no-underline md:text-left">
+                            Don't have an account? Create one now!!!
+                        </div>
                     </div>
-
-                    <div class="p-2">
-                        <div id="loginform" class="{{ session()->has('register-form') ? 'hidden' : '' }}">
-
-
-
+                    <p class="hidden">
+                        {{ $form = true }}
+                    </p>
+                    @if (session()->has('register-form') || $form)
+                        <style>
+                            .forcedisplay {
+                                display: block !important;
+                            }
+                        </style>
+                        <div class="{{ session()->has('register-form') ? 'forcedisplay' : 'hidden' }}" id="registerform">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="closeModal ml-[90%] size-6 text-black">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
                             </svg>
 
-                            <div class="mx-auto flex w-full justify-center md:justify-start gap-1 text-lg uppercase font-bold">
-                                <p>Sign Up</p>
-                                <p>/</p>
-                                <p>Register</p>
+                            <div
+                                class="mx-auto flex w-full justify-center gap-1 text-lg font-bold uppercase md:justify-start">
+                                <p>Create an account</p>
                             </div>
 
-                            <p class="my-2 text-center md:text-left text-sm capitalize text-gray-400">
-                                Manage your bookings with ease and <br /> enjoy members-only benefits
-                            </p>
+                            <p class="my-2 text-center text-sm capitalize text-gray-400 md:text-left">Manage your bookings
+                                with
+                                ease and <br />
+                                enjoy members-only benefits</p>
 
-                            <form action="{{ route('modal.checkout.login') }}" method="post">
+                            <form action="{{ route('modal.checkout.register.store') }}" method="post">
                                 @csrf
                                 <input type="hidden" name="redirect_to" value="back">
-                                {{-- <input type="text" name="event_reference" value="{{ trim($event_reference) }}" hidden>
-                                <input type="number" name="regular_unit" class="regular_unit" id="regular_unit" value="{{ trim( $regular_unit == 0 ? '0' : $regular_unit) }}" hidden>
-                                <input type="number" name="vip_unit" class="vip_unit" id="vip_unit" value="{{ trim( $vip_unit == 0 ? '0' : $vip_unit) }}" hidden>
-                                <input type="number" name="vvip_unit" class="vvip_unit" id="vvip_unit" value="{{ trim( $vvip_unit == 0 ? '0' : $vvip_unit) }}" hidden> --}}
-                                <div id="provideAuthEmail" class="flex flex-col">
-                                    {{--     <span
-                                    class="text-[12px] font-[200] text-red-700 text-center md:text-start  flex flex-col gap-1 ">
-
-                                    <span class="block">
-                                        @error('email')
-                                            {{ $message }}
-                                        @enderror
-                                    </span>
-                                    <span class="block">
-                                        @error('password')
-                                            {{ $message }}
-                                        @enderror
-                                    </span>
-                                </span> --}}
-
-
-                                    </span>
-
-                                    <label class="block capitalize font-bold text-center md:text-left text-black text-base"
-                                        for="password">Provide Email Address </label>
-
-
-                                    <span id="email-error"
-                                        class="hidden text-[12px] font-[200] text-red-700 text-center md:text-start">
-                                        Email Provided incorrect!!
-                                    </span>
-                                    <input id="email" name="email"
-                                        class="input my-2 border border-gray-200 px-2 py-2 md:border-2 w-full" type="email"
-                                        placeholder="Enter your email address" />
-                                    <button type="button" id="continueToPwd"
-                                        class="my-2 rounded-sm bg-red-600 hover:bg-red-900 py-2 capitalize text-white w-full">Continue</button>
+                                <div id="sectionOne" class="flex flex-col">
+                                    <label class="text-center font-bold capitalize md:text-left">First Name</label>
+                                    <input value="{{ old('firstname') }}" name="firstname"
+                                        class="input my-2 w-full border border-gray-200 px-2 py-2 md:border-2"
+                                        type="text" placeholder="Enter your First Name" />
+                                    <label class="text-center font-bold capitalize md:text-left">Last Name</label>
+                                    <input value="{{ old('lastname') }}" name="lastname"
+                                        class="input my-2 w-full border border-gray-200 px-2 py-2 md:border-2"
+                                        type="text" placeholder="Enter your Last Name" />
+                                    <button type="button"
+                                        class="continueButton my-2 w-full rounded-sm bg-red-600 py-2 capitalize text-white hover:bg-red-900">Continue</button>
                                 </div>
-                                <div id="provideAuthPwd" class="hidden">
+
+                                <div id="sectionTwo" class="hidden flex-col">
                                     <div class="flex flex-col">
-                                        <span class="block w-full">
-                                            <label
-                                                class="capitalize font-bold text-center md:text-left input-label block w-full"
-                                                for="password">Password</label>
-                                        </span>
-                                        <div class="relative ">
-                                            <input id="password" name="password"
-                                                class="input my-2 w-full border border-gray-200 px-2 py-2 md:border-2"
-                                                type="password" placeholder="Enter your password" />
-                                            <div id=""
-                                                class="password-visibility absolute right-[5px] top-[17px] cursor-pointer togglePassword">
-                                                <img class="h-[25px]" src="{{ asset('image/eye.svg') }}"
-                                                    alt="Toggle visibility">
-                                                <div id="" class="stroke"></div>
-                                            </div>
+                                        <label class="text-center font-bold capitalize md:text-left">Email Address</label>
+                                        <input value="{{ old('email') }}" name="email"
+                                            class="input my-2 w-full border border-gray-200 px-2 py-2 md:border-2"
+                                            type="email" placeholder="Enter your Email" />
+                                    </div>
+                                    <div class="flex flex-col">
+                                        <label class="text-center font-bold capitalize md:text-left">Date of Birth</label>
+                                        <input value="{{ old('age') }}" name="age"
+                                            class="input my-2 w-full border border-gray-200 px-2 py-2 md:border-2"
+                                            type="date"  />
+                                    </div>
+
+                                    <div class="flex flex-col">
+                                        <label class="text-center font-bold capitalize md:text-left">Gender</label>
+                                        <select class="my-2 w-full border border-gray-200 px-2 py-2 md:border-2" name="gender" id="">
+                                <option value="none" selected>None</option>
+                                <option value="male" >Male</option>
+                                <option value="Female" >Female</option>
+                            </select>
+                                    </div>
+
+                                    <button type="button"
+                                        class="continueButton my-2 w-full rounded-sm bg-red-600 py-2 capitalize text-white hover:bg-red-900">Continue</button>
+                                    <div class="arrowback text-back input-label cursor-pointer">← Back</div>
+                                </div>
+
+                                <div id="sectionThree" class="hidden flex-col">
+                                    <div class="flex flex-col">
+                                        <label class="text-center font-bold capitalize md:text-left">Contact</label>
+                                        <input name="phone"
+                                            class="input my-2 w-full border border-gray-200 px-2 py-2 md:border-2"
+                                            type="text" value="{{ old('phone') }}"
+                                            placeholder="Enter your Phone Number" />
+                                    </div>
+                                    <label class="input-label text-center font-bold capitalize md:text-left">House
+                                        Address</label>
+                                    <input name="address"
+                                        class="input my-2 w-full border border-gray-200 px-2 py-2 md:border-2"
+                                        value="{{ old('address') }}" type="text"
+                                        placeholder="Provide your Residential Address" />
+
+                                    <button type="button"
+                                        class="continueButton my-2 w-full rounded-sm bg-red-600 py-2 capitalize text-white hover:bg-red-900">Continue</button>
+                                    <div class="arrowback input-label cursor-pointer text-black">← Back</div>
+                                </div>
+
+                                <div id="sectionFour" class="hidden flex-col">
+                                    <label
+                                        class="input-label text-center font-bold capitalize md:text-left">Password</label>
+                                    <div class="relative">
+
+                                        <input id="password" name="password"
+                                            class="input my-2 w-full border border-gray-200 px-2 py-2 md:border-2"
+                                            type="password" placeholder="Enter your password" />
+                                        <div id=""
+                                            class="password-visibility togglePassword absolute right-[5px] top-[17px] cursor-pointer">
+                                            <img class="h-[25px]" src="{{ asset('image/eye.svg') }}"
+                                                alt="Toggle visibility">
+                                            <div id="" class="stroke"></div>
                                         </div>
                                     </div>
-                                    <div>
-                                        <div class="saveLog">
-                                            <label class="saveLoginCheckBox">
-                                                <input id="ch1" type="checkbox" name="remember">
-                                                <div class="transition"></div>
-                                            </label>
-                                            <p>Remember Me</p>
+                                    <label class="input-label text-center font-bold capitalize md:text-left">Confirm
+                                        Password</label>
+                                    <div class="relative">
+
+                                        <input id="password" name="password"
+                                            class="input my-2 w-full border border-gray-200 px-2 py-2 md:border-2"
+                                            type="password" placeholder="Confirm your password" />
+                                        <div id=""
+                                            class="password-visibility togglePassword absolute right-[5px] top-[17px] cursor-pointer">
+                                            <img class="h-[25px]" src="{{ asset('image/eye.svg') }}"
+                                                alt="Toggle visibility">
+                                            <div id="" class="stroke"></div>
                                         </div>
-                                        <button type="submit"
-                                            class="my-2 rounded-sm bg-red-600 hover:bg-red-900 py-2 capitalize text-white w-full">Login</button>
                                     </div>
+                                    <div class="g-recaptcha" data-sitekey="6LddiEkrAAAAAEeC0OgrYY9NpHAnA6iVGn21iOV9"></div>
+
+                                    <input class="hover:red-alt-800 submit w-full rounded-md bg-red-700 px-2 py-2 text-start uppercase text-white hover:bg-red-900" type="submit" value="Login">
+                                    <div class="arrowback input-label cursor-pointer text-black">← Back</div>
                                 </div>
                             </form>
 
-                            <p class="my-2 text-center md:text-left uppercase">or</p>
+                            <p class="my-2 text-center uppercase md:text-left">or</p>
                             <button
-                                class="duration-600 mx-auto md:mx-0 flex max-w-xs items-center justify-center md:justify-start gap-1 rounded-lg border border-gray-300 bg-white px-5 py-2 text-sm font-bold uppercase text-gray-800 transition-transform hover:scale-105">
+                                class="duration-600 mx-auto flex max-w-xs items-center justify-center gap-1 rounded-lg border border-gray-300 bg-white px-5 py-2 text-sm font-bold uppercase text-gray-800 transition-transform hover:scale-105 md:mx-0 md:justify-start">
                                 Continue with Google
                             </button>
 
                             <p class="my-2 text-center text-sm md:text-left"> By signing in or registering I confirm that I
                                 have read and agreed to
-                                900Tickets <a class="text-red-500" href="#">terms and conditions</a> and <a
-                                    class="text-red-500" href="#">privacy policy</a>
+                                900Tickets <a class="text-red-500" href="{{route('index.privacy-policy')}}">terms and conditions</a> and <a
+                                    class="text-red-500" href="{{route('index.terms-and-conditions')}}">privacy policy</a>
                             </p>
                             <div
-                                class="text-center md:text-left text-sm my-2 block text-red-500 capitalize underline hover:no-underline login cursor-pointer">
-                                Don't have an account? Create one now!!!
+                                class="register my-2 block cursor-pointer text-center text-sm capitalize text-red-500 underline hover:no-underline md:text-left">
+                                Already have an account? Sign in
                             </div>
                         </div>
-                        <p class="hidden">
-                            {{ $form = true }}
-                        </p>
-                        @if (session()->has('register-form') || $form)
-                            <style>
-                                .forcedisplay {
-                                    display: block !important;
-                                }
-                            </style>
-                            <div class="{{ session()->has('register-form') ? 'forcedisplay' : 'hidden' }}" id="registerform">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                    stroke="currentColor" class="closeModal ml-[90%] size-6 text-black">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-                                </svg>
+                    @endif
 
-                                <div
-                                    class="mx-auto flex w-full justify-center md:justify-start gap-1 text-lg uppercase font-bold">
-                                    <p>Create an account</p>
-                                </div>
-
-                                <p class="my-2 text-center md:text-left text-sm capitalize text-gray-400">Manage your bookings
-                                    with
-                                    ease and <br />
-                                    enjoy members-only benefits</p>
-
-                                <form action="{{ route('modal.checkout.register.store') }}" method="post">
-                                    @csrf
-                                    <input type="hidden" name="redirect_to" value="back">
-                                    <div id="sectionOne" class="flex flex-col">
-                                        <label class="capitalize font-bold text-center md:text-left">First Name</label>
-                                        <input value="{{ old('firstname') }}" name="firstname"
-                                            class="my-2 border w-full border-gray-200 px-2 py-2 md:border-2 input"
-                                            type="text" placeholder="Enter your First Name" />
-                                        <label class="capitalize font-bold text-center md:text-left">Last Name</label>
-                                        <input value="{{ old('lastname') }}" name="lastname"
-                                            class="my-2 border w-full border-gray-200 px-2 py-2 md:border-2 input"
-                                            type="text" placeholder="Enter your Last Name" />
-                                        <button type="button"
-                                            class="continueButton my-2 rounded-sm bg-red-600 hover:bg-red-900 py-2 capitalize text-white w-full">Continue</button>
-                                    </div>
-
-                                    <div id="sectionTwo" class="hidden  flex-col">
-                                        <div class="flex flex-col">
-                                            <label class="capitalize font-bold text-center md:text-left ">Email Address</label>
-                                            <input value="{{ old('email') }}" name="email"
-                                                class="my-2 border w-full border-gray-200 px-2 py-2 md:border-2 input"
-                                                type="email" placeholder="Enter your Email" />
-                                        </div>
-                                        <div class="flex flex-col">
-                                            <label class="capitalize font-bold text-center md:text-left">Contact</label>
-                                            <input name="phone"
-                                                class="my-2 border w-full border-gray-200 px-2 py-2 md:border-2 input"
-                                                type="text" value="{{ old('phone') }}"
-                                                placeholder="Enter your Phone Number" />
-                                        </div>
-                                        <button type="button"
-                                            class="continueButton my-2 rounded-sm bg-red-600 hover:bg-red-900 py-2 capitalize text-white w-full ">Continue</button>
-                                        <div class="arrowback cursor-pointer text-back input-label">← Back</div>
-                                    </div>
-
-                                    <div id="sectionThree" class="hidden  flex-col">
-                                        <label class="capitalize font-bold text-center md:text-left input-label">House
-                                            Address</label>
-                                        <input name="address"
-                                            class="my-2 border w-full border-gray-200 px-2 py-2 md:border-2 input"
-                                            value="{{ old('address') }}" type="text"
-                                            placeholder="Provide your Residential Address" /><label
-                                            class="capitalize font-bold text-center input-label md:text-left ">Password</label>
-                                        <div class="relative">
-
-                                            <input id="password" name="password"
-                                                class="my-2 w-full border border-gray-200 px-2 py-2 md:border-2 input"
-                                                type="password" placeholder="Enter your password" />
-                                            <div id=""
-                                                class="password-visibility absolute right-[5px] top-[17px] cursor-pointer togglePassword">
-                                                <img class="h-[25px]" src="{{ asset('image/eye.svg') }}"
-                                                    alt="Toggle visibility">
-                                                <div id="" class="stroke"></div>
-                                            </div>
-                                        </div>
-                                        <button type="button"
-                                            class="continueButton my-2 rounded-sm bg-red-600 hover:bg-red-900 py-2 capitalize text-white w-full">Continue</button>
-                                        <div class="arrowback cursor-pointer text-black input-label">← Back</div>
-                                    </div>
-
-                                    <div id="sectionFour" class="hidden  flex-col">
-                                        <label class="capitalize font-bold text-center md:text-left input-label">Confirm
-                                            Password</label>
-                                        <div class="relative">
-
-                                            <input id="password" name="password"
-                                                class="my-2 w-full border border-gray-200 px-2 py-2 md:border-2 input"
-                                                type="password" placeholder="Confirm your password" />
-                                            <div id=""
-                                                class="password-visibility absolute right-[5px] top-[17px] cursor-pointer togglePassword">
-                                                <img class="h-[25px]" src="{{ asset('image/eye.svg') }}"
-                                                    alt="Toggle visibility">
-                                                <div id="" class="stroke"></div>
-                                            </div>
-                                        </div>
-                                        <button type="submit"
-                                            class="my-2 rounded-sm bg-red-600 hover:bg-red-900 py-2 capitalize text-white w-full">Create
-                                            Account</button>
-                                        <div class="arrowback cursor-pointer text-black input-label">← Back</div>
-                                    </div>
-                                </form>
-
-                                <p class="my-2 text-center md:text-left uppercase">or</p>
-                                <button
-                                    class="duration-600 mx-auto md:mx-0 flex max-w-xs items-center justify-center md:justify-start gap-1 rounded-lg border border-gray-300 bg-white px-5 py-2 text-sm font-bold uppercase text-gray-800 transition-transform hover:scale-105">
-                                    Continue with Google
-                                </button>
-
-                                <p class="my-2 text-center text-sm md:text-left"> By signing in or registering I confirm that I
-                                    have read and agreed to
-                                    900Tickets <a class="text-red-500" href="#">terms and conditions</a> and <a
-                                        class="text-red-500" href="#">privacy policy</a>
-                                </p>
-                                <div
-                                    class="text-center md:text-left text-sm my-2 block text-red-500 capitalize underline hover:no-underline register cursor-pointer">
-                                    Already have an account? Sign in
-                                </div>
-                            </div>
-                        @endif
-
-                    </div>
                 </div>
-                @if (session()->has('otp-form'))
-                    <div
-                        class="flex bg-white items-center justify-center gap-2   lg:w-[70%]   w-[85%] rounded-lg border border-gray-200  md:border-2">
-                        <div class="hidden lg:block">
-                            <img class="h-fit w-[600px] object-cover p-1" src="{{ asset('image/profilePoP2-v3.jpg') }}"
-                                alt="random img" />
-                        </div>
-
-
-                        <div class="">
-                            {{-- <svg  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor" class="closeModal ml-[90%] size-6 text-black">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-                        </svg> --}}
-                            <div class="mx-auto   rounded-xl bg-white px-4 py-10 text-center shadow sm:px-8">
-                                <section class="mb-8">
-                                    <h1 class="mb-1 text-2xl font-bold">Email Verification</h1>
-                                    <p class="text-[15px] text-slate-500">Enter the 6-digit verification code that was sent to
-                                        your
-                                        email.</p>
-                                    <div>
-                                        @if (session('message'))
-                                            <div>
-                                                <strong style="color: #7a0909">{{ session('message') }}</strong>
-
-                                            </div>
-                                        @endif
-                                    </div>
-                                </section>
-                                <form method="post" action="{{ route('modal.checkout.register.otp.store') }}"
-                                    class="otp-form">
-                                    @csrf
-                                    <div class="flex items-center justify-center gap-3">
-                                        <input type="hidden" name="redirect_to" value="back">
-                                        <input type="text" name="otp1"
-                                            class="otp-input h-[45px] md:h-14 w-[45px] md:w-14 appearance-none rounded border border-gray-300 bg-slate-100 p-4 text-center text-2xl font-extrabold text-black outline-none hover:border-slate-200 focus:border-blue-300 focus:bg-white focus:ring-2 focus:ring-indigo-100"
-                                            pattern="\d*" maxlength="1" required />
-                                        <input type="text" name="otp2"
-                                            class="otp-input h-[45px] md:h-14 w-[45px] md:w-14  appearance-none rounded border border-gray-300 bg-slate-100 p-4 text-center text-2xl font-extrabold text-black outline-none hover:border-slate-200 focus:border-blue-300 focus:bg-white focus:ring-2 focus:ring-indigo-100"
-                                            pattern="\d*" maxlength="1" required />
-                                        <input type="text" name="otp3"
-                                            class="otp-input h-[45px] md:h-14 w-[45px] md:w-14  appearance-none rounded border border-gray-300 bg-slate-100 p-4 text-center text-2xl font-extrabold text-black outline-none hover:border-slate-200 focus:border-blue-300 focus:bg-white focus:ring-2 focus:ring-indigo-100"
-                                            pattern="\d*" maxlength="1" required />
-                                        <input type="text" name="otp4"
-                                            class="otp-input h-[45px] md:h-14 w-[45px] md:w-14  appearance-none rounded border border-gray-300 bg-slate-100 p-4 text-center text-2xl font-extrabold text-black outline-none hover:border-slate-200 focus:border-blue-300 focus:bg-white focus:ring-2 focus:ring-indigo-100"
-                                            pattern="\d*" maxlength="1" required />
-                                        <input type="text" name="otp5"
-                                            class="otp-input h-[45px] md:h-14 w-[45px] md:w-14  appearance-none rounded border border-gray-300 bg-slate-100 p-4 text-center text-2xl font-extrabold text-black outline-none hover:border-slate-200 focus:border-blue-300 focus:bg-white focus:ring-2 focus:ring-indigo-100"
-                                            pattern="\d*" maxlength="1" required />
-                                        <input type="text" name="otp6"
-                                            class="otp-input h-[45px] md:h-14 w-[45px] md:w-14  appearance-none rounded border border-gray-300 bg-slate-100 p-4 text-center text-2xl font-extrabold text-black outline-none hover:border-slate-200 focus:border-blue-300 focus:bg-white focus:ring-2 focus:ring-indigo-100"
-                                            pattern="\d*" maxlength="1" required />
-
-
-                                    </div>
-                                    <div class="mx-auto mt-4 max-w-[260px]">
-                                        <button type="submit"
-                                            class="inline-flex w-full justify-center whitespace-nowrap rounded-lg bg-red-700 px-3.5 py-2.5 text-sm font-medium text-white shadow-sm shadow-indigo-950/10 transition-colors duration-150 hover:bg-red-900 focus:outline-none focus:ring focus:ring-indigo-300 focus-visible:outline-none focus-visible:ring focus-visible:ring-indigo-300 button-submit">
-                                            Verify Account
-                                        </button>
-                                    </div>
-                                </form>
-                                <form class="my-2" action="{{ route('modal.checkout.register.otp.resend') }}"
-                                    method="post">
-                                    @csrf
-                                    <div class="text-sm text-gray-600">You can get a new OTP in
-                                        <span id="otp-timer">00:00</span>
-                                        <button type="submit" id="request-otp-button"
-                                            class="text-red-400 underline hover:text-red-500" disabled>Request
-                                            OTP</button>
-                                    </div>
-                                </form>
-                                <a href="{{ url()->previous() }}" class="text-sm text-gray-500"><i
-                                        class="fa-solid fa-arrow-left-long ">
-
-                                    </i> Back</a>
-                                {{-- <div class="mt-4 text-sm text-slate-500">Didn't receive code? <a class="font-medium text-indigo-500 hover:text-indigo-600" href="#0">Resend</a></div> --}}
-                            </div>
-                        </div>
-
-
-
+            </div>
+            @if (session()->has('otp-form'))
+                <div
+                    class="flex w-[85%] items-center justify-center gap-2 rounded-lg border border-gray-200 bg-white md:border-2 lg:w-[70%]">
+                    <div class="hidden lg:block">
+                        <img class="h-fit w-[600px] object-cover p-1" src="{{ asset('image/profilePoP2-v3.jpg') }}"
+                            alt="random img" />
                     </div>
-                @endif
 
-            </section>
-            <!-- sign up model section end -->
-        @endguest
+
+                    <div class="">
+                        {{-- <svg  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke-width="1.5" stroke="currentColor" class="closeModal ml-[90%] size-6 text-black">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                    </svg> --}}
+                        <div class="mx-auto rounded-xl bg-white px-4 py-10 text-center shadow sm:px-8">
+                            <section class="mb-8">
+                                <h1 class="mb-1 text-2xl font-bold">Email Verification</h1>
+                                <p class="text-[15px] text-slate-500">Enter the 6-digit verification code that was sent to
+                                    your
+                                    email.</p>
+                                <div>
+                                    @if (session('message'))
+                                        <div>
+                                            <strong style="color: #7a0909">{{ session('message') }}</strong>
+
+                                        </div>
+                                    @endif
+                                </div>
+                            </section>
+                            <form method="post" action="{{ route('modal.checkout.register.otp.store') }}"
+                                class="otp-form">
+                                @csrf
+                                <div class="flex items-center justify-center gap-3">
+                                    <input type="hidden" name="redirect_to" value="back">
+                                    <input type="text" name="otp1"
+                                        class="otp-input h-[45px] w-[45px] appearance-none rounded border border-gray-300 bg-slate-100 p-4 text-center text-2xl font-extrabold text-black outline-none hover:border-slate-200 focus:border-blue-300 focus:bg-white focus:ring-2 focus:ring-indigo-100 md:h-14 md:w-14"
+                                        pattern="\d*" maxlength="1" required />
+                                    <input type="text" name="otp2"
+                                        class="otp-input h-[45px] w-[45px] appearance-none rounded border border-gray-300 bg-slate-100 p-4 text-center text-2xl font-extrabold text-black outline-none hover:border-slate-200 focus:border-blue-300 focus:bg-white focus:ring-2 focus:ring-indigo-100 md:h-14 md:w-14"
+                                        pattern="\d*" maxlength="1" required />
+                                    <input type="text" name="otp3"
+                                        class="otp-input h-[45px] w-[45px] appearance-none rounded border border-gray-300 bg-slate-100 p-4 text-center text-2xl font-extrabold text-black outline-none hover:border-slate-200 focus:border-blue-300 focus:bg-white focus:ring-2 focus:ring-indigo-100 md:h-14 md:w-14"
+                                        pattern="\d*" maxlength="1" required />
+                                    <input type="text" name="otp4"
+                                        class="otp-input h-[45px] w-[45px] appearance-none rounded border border-gray-300 bg-slate-100 p-4 text-center text-2xl font-extrabold text-black outline-none hover:border-slate-200 focus:border-blue-300 focus:bg-white focus:ring-2 focus:ring-indigo-100 md:h-14 md:w-14"
+                                        pattern="\d*" maxlength="1" required />
+                                    <input type="text" name="otp5"
+                                        class="otp-input h-[45px] w-[45px] appearance-none rounded border border-gray-300 bg-slate-100 p-4 text-center text-2xl font-extrabold text-black outline-none hover:border-slate-200 focus:border-blue-300 focus:bg-white focus:ring-2 focus:ring-indigo-100 md:h-14 md:w-14"
+                                        pattern="\d*" maxlength="1" required />
+                                    <input type="text" name="otp6"
+                                        class="otp-input h-[45px] w-[45px] appearance-none rounded border border-gray-300 bg-slate-100 p-4 text-center text-2xl font-extrabold text-black outline-none hover:border-slate-200 focus:border-blue-300 focus:bg-white focus:ring-2 focus:ring-indigo-100 md:h-14 md:w-14"
+                                        pattern="\d*" maxlength="1" required />
+
+
+                                </div>
+                                <div class="mx-auto mt-4 max-w-[260px]">
+                                    <button type="submit"
+                                        class="button-submit inline-flex w-full justify-center whitespace-nowrap rounded-lg bg-red-700 px-3.5 py-2.5 text-sm font-medium text-white shadow-sm shadow-indigo-950/10 transition-colors duration-150 hover:bg-red-900 focus:outline-none focus:ring focus:ring-indigo-300 focus-visible:outline-none focus-visible:ring focus-visible:ring-indigo-300">
+                                        Verify Account
+                                    </button>
+                                </div>
+                            </form>
+                            <form class="my-2" action="{{ route('modal.checkout.register.otp.resend') }}"
+                                method="post">
+                                @csrf
+                                <div class="text-sm text-gray-600">You can get a new OTP in
+                                    <span id="otp-timer">00:00</span>
+                                    <button type="submit" id="request-otp-button"
+                                        class="text-red-400 underline hover:text-red-500" disabled>Request
+                                        OTP</button>
+                                </div>
+                            </form>
+                            <a href="{{ url()->previous() }}" class="text-sm text-gray-500"><i
+                                    class="fa-solid fa-arrow-left-long">
+
+                                </i> Back</a>
+                            {{-- <div class="mt-4 text-sm text-slate-500">Didn't receive code? <a class="font-medium text-indigo-500 hover:text-indigo-600" href="#0">Resend</a></div> --}}
+                        </div>
+                    </div>
+
+
+
+                </div>
+            @endif
+
+        </section>
+        <!-- sign up model section end -->
+    @endguest
     </div>
 
     {{-- @if (session('success')){
@@ -779,7 +797,7 @@
                             <div class="flex justify-between">
                                 <form method="POST" action="{{ route('event.addtocart') }}">
                                     @csrf
-                                    <input type="text" name="event_reference" class=" hidden"
+                                    <input type="text" name="event_reference" class="hidden"
                                         value="{{ trim($event->event_reference) }}" readonly>
                                     <input type="number" name="regular_unit" class="regular_unit hidden"
                                         id="regular_unit" value="0" readonly>
@@ -788,7 +806,7 @@
                                     <input type="number" name="vvip_unit" class="vvip_unit hidden" id="vvip_unit"
                                         value="0" readonly>
                                     <button type="submit"
-                                        class="ld-ext-right rounded-md bg-[#cc2121] px-4 py-2 text-white btn-animation">
+                                        class="ld-ext-right btn-animation rounded-md bg-[#cc2121] px-4 py-2 text-white">
 
                                         Add Item to Queue
                                         <div class="ld ld-ring ld-spin"></div>
@@ -809,7 +827,7 @@
                                     <input type="text" name="vvip_unit" class="vvip_unit" id="vvip_unit"
                                         value="0" hidden>
                                     <button type="submit"
-                                        class="btn-animation ld-ext-right rounded-md bg-[#cc2121] px-4 py-2 text-white ld-ext-right">
+                                        class="btn-animation ld-ext-right rounded-md bg-[#cc2121] px-4 py-2 text-white">
 
                                         Pay Now
                                         <div class="ld ld-ring ld-spin"></div>

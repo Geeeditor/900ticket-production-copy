@@ -94,9 +94,11 @@
                                 </div>
                             </div>
 
-                            <button
-                                class="hover:red-alt-800 submit w-full rounded-md bg-red-700 px-2 py-2 text-start uppercase text-white hover:bg-red-900"
-                                type="submit">Login</button>
+                            <div class="g-recaptcha" data-sitekey="6LddiEkrAAAAAEeC0OgrYY9NpHAnA6iVGn21iOV9"></div>
+
+                            <input class="hover:red-alt-800 submit w-full rounded-md bg-red-700 px-2 py-2 text-start uppercase text-white hover:bg-red-900" type="submit" value="Login">
+
+                            
 
                                 <p class="my-2 text-center text-sm md:text-left"> By signing in or registering I confirm that I
                                 have read and agreed to

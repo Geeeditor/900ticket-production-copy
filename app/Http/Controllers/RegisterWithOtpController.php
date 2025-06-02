@@ -25,11 +25,12 @@ class RegisterWithOtpController extends Controller
             'firstname'=> ['required', 'string', 'max:255'],
             'lastname' => ['required', 'string', 'max:255'],
             'address' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase',
-            'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'phone' => ['required', 'string', 'max:255'],
-            'password' => ['required', Password::min(8)->mixedCase()->numbers()->symbols() ]
-            // 'confirm_password' => ['required']
+            'age' => ['required', 'date'],
+            'gender' => ['required', 'string'],
+            'password' => ['required', 'different:current_password', Password::min(8)->mixedCase()->numbers()->symbols()],
+            'confirm_password' => ['requierd', 'string', 'same:password']
         ]);
 
         // V9p4bGhKHg959vH3^
@@ -49,6 +50,8 @@ class RegisterWithOtpController extends Controller
         $request->session()->put('register_address', $request->address);
         $request->session()->put('register_email', $request->email);
         $request->session()->put('register_phone', $request->phone);
+        $request->session()->put('register_gender', $request->gender);
+        $request->session()->put('register_age', $request->age);
         $request->session()->put('register_password', Hash::make($request->password));
 
         return redirect()->route('register.verify.otp');
@@ -63,6 +66,8 @@ class RegisterWithOtpController extends Controller
         $lastname = $request->session()->get('register_lastname');
         $address = $request->session()->get('register_address');
         $phone = $request->session()->get('register_phone');
+        $age = $request->session()->get('register_age');
+        $gender = $request->session()->get('register_gender');
         $password = $request->session()->get('register_password');
 
          if (!$email) {
@@ -127,6 +132,9 @@ class RegisterWithOtpController extends Controller
         $lastname = $request->session()->get('register_lastname');
         $address = $request->session()->get('register_address');
         $phone = $request->session()->get('register_phone');
+        $age = $request->session()->get('register_age');
+        $gender = $request->session()->get('register_gender');
+        $phone = $request->session()->get('register_phone');
         $password = $request->session()->get('register_password');
 
         $emailOtp = EmailOtp::where('email', $email)->where('otp', $otp)->where('expired_at', '>=', Carbon::now())->first();
@@ -141,6 +149,8 @@ class RegisterWithOtpController extends Controller
             'address'=> $address,
             'email'=> $email,
             'phone'=> $phone,
+            'age'=> $age,
+            'gender'=> $gender,
             'password'=> $password,
         ]);
 
@@ -150,6 +160,8 @@ class RegisterWithOtpController extends Controller
         $request->session()->forget('register_firstname');
         $request->session()->forget('register_lastname');
         $request->session()->forget('register_address');
+        $request->session()->forget('register_gender');
+        $request->session()->forget('register_gender');
         $request->session()->forget('register_phone');
         $request->session()->forget('register_password');
 

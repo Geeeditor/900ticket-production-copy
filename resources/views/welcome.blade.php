@@ -30,7 +30,7 @@
                             </svg>
 
                             <div class="mx-auto flex w-full justify-center gap-1 text-lg font-bold uppercase md:justify-start">
-                                <p>Sign Up</p>
+                                <p>Sign in</p>
                                 <p>/</p>
                                 <p>Register</p>
                             </div>
@@ -96,6 +96,7 @@
                                         </div>
                                     </div>
                                     <div>
+                                        <div class="g-recaptcha" data-sitekey="6LddiEkrAAAAAEeC0OgrYY9NpHAnA6iVGn21iOV9"></div>
                                         <div class="saveLog">
                                             <label class="saveLoginCheckBox">
                                                 <input id="ch1" type="checkbox" name="remember">
@@ -103,8 +104,10 @@
                                             </label>
                                             <p>Remember Me</p>
                                         </div>
-                                        <button type="submit"
-                                            class="my-2 w-full rounded-sm bg-red-600 py-2 capitalize text-white hover:bg-red-900">Login</button>
+
+
+                                        <input class="hover:red-alt-800 submit w-full rounded-md bg-red-700 px-2 py-2 text-start uppercase text-white hover:bg-red-900" type="submit" value="Login">
+
                                     </div>
                                 </div>
                             </form>
@@ -174,24 +177,48 @@
                                                 type="email" placeholder="Enter your Email" />
                                         </div>
                                         <div class="flex flex-col">
-                                            <label class="text-center font-bold capitalize md:text-left">Contact</label>
-                                            <input name="phone"
+                                            <label class="text-center font-bold capitalize md:text-left">Date of Birth</label>
+                                            <input value="{{ old('age') }}" name="age"
                                                 class="input my-2 w-full border border-gray-200 px-2 py-2 md:border-2"
-                                                type="text" value="{{ old('phone') }}"
-                                                placeholder="Enter your Phone Number" />
+                                                type="date"  />
                                         </div>
+
+                                        <div class="flex flex-col">
+                                            <label class="text-center font-bold capitalize md:text-left">Gender</label>
+                                            <select class="my-2 w-full border border-gray-200 px-2 py-2 md:border-2" name="gender" id="">
+                                    <option value="none" selected>None</option>
+                                    <option value="male" >Male</option>
+                                    <option value="Female" >Female</option>
+                                </select>
+                                        </div>
+
                                         <button type="button"
                                             class="continueButton my-2 w-full rounded-sm bg-red-600 py-2 capitalize text-white hover:bg-red-900">Continue</button>
                                         <div class="arrowback text-back input-label cursor-pointer">← Back</div>
                                     </div>
 
                                     <div id="sectionThree" class="hidden flex-col">
+                                        <div class="flex flex-col">
+                                            <label class="text-center font-bold capitalize md:text-left">Contact</label>
+                                            <input name="phone"
+                                                class="input my-2 w-full border border-gray-200 px-2 py-2 md:border-2"
+                                                type="text" value="{{ old('phone') }}"
+                                                placeholder="Enter your Phone Number" />
+                                        </div>
                                         <label class="input-label text-center font-bold capitalize md:text-left">House
                                             Address</label>
                                         <input name="address"
                                             class="input my-2 w-full border border-gray-200 px-2 py-2 md:border-2"
                                             value="{{ old('address') }}" type="text"
-                                            placeholder="Provide your Residential Address" /><label
+                                            placeholder="Provide your Residential Address" />
+
+                                        <button type="button"
+                                            class="continueButton my-2 w-full rounded-sm bg-red-600 py-2 capitalize text-white hover:bg-red-900">Continue</button>
+                                        <div class="arrowback input-label cursor-pointer text-black">← Back</div>
+                                    </div>
+
+                                    <div id="sectionFour" class="hidden flex-col">
+                                        <label
                                             class="input-label text-center font-bold capitalize md:text-left">Password</label>
                                         <div class="relative">
 
@@ -205,12 +232,6 @@
                                                 <div id="" class="stroke"></div>
                                             </div>
                                         </div>
-                                        <button type="button"
-                                            class="continueButton my-2 w-full rounded-sm bg-red-600 py-2 capitalize text-white hover:bg-red-900">Continue</button>
-                                        <div class="arrowback input-label cursor-pointer text-black">← Back</div>
-                                    </div>
-
-                                    <div id="sectionFour" class="hidden flex-col">
                                         <label class="input-label text-center font-bold capitalize md:text-left">Confirm
                                             Password</label>
                                         <div class="relative">
@@ -225,9 +246,9 @@
                                                 <div id="" class="stroke"></div>
                                             </div>
                                         </div>
-                                        <button type="submit"
-                                            class="my-2 w-full rounded-sm bg-red-600 py-2 capitalize text-white hover:bg-red-900">Create
-                                            Account</button>
+                                        <div class="g-recaptcha" data-sitekey="6LddiEkrAAAAAEeC0OgrYY9NpHAnA6iVGn21iOV9"></div>
+
+                                        <input class="hover:red-alt-800 submit w-full rounded-md bg-red-700 px-2 py-2 text-start uppercase text-white hover:bg-red-900" type="submit" value="Login">
                                         <div class="arrowback input-label cursor-pointer text-black">← Back</div>
                                     </div>
                                 </form>
